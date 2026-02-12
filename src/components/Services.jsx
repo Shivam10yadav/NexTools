@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { FileText, QrCode, Scissors, Archive, Merge, ImageIcon, ArrowRight } from 'lucide-react'
 
 const Services = () => {
   const navigate = useNavigate()
@@ -7,12 +8,7 @@ const Services = () => {
   const services = [
     {
       id: 'text-to-pdf',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
+      icon: <FileText size={32} />,
       title: "Text & MD to PDF",
       description: "Convert text and markdown files into professional PDFs with perfect formatting and styling.",
       path: "/services/texttopdf",
@@ -21,12 +17,7 @@ const Services = () => {
     },
     {
       id: 'qr-generator',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
-          <path d="M7 7h3v3H7zM14 7h3v3h-3zM7 14h3v3H7zM14 14h3v3h-3z" fill="currentColor"/>
-        </svg>
-      ),
+      icon: <QrCode size={32} />,
       title: "QR Code Generator",
       description: "Create custom QR codes instantly for your business, websites, and marketing campaigns.",
       path: "/services/qrgenerator",
@@ -35,12 +26,7 @@ const Services = () => {
     },
     {
       id: 'pdf-splitter',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M14 2v6h6M9 15h6M12 18v-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
+      icon: <Scissors size={32} />,
       title: "PDF Splitter",
       description: "Split large PDF files into smaller documents with precise page selection and control.",
       path: "/services/pdfsplitter",
@@ -49,11 +35,7 @@ const Services = () => {
     },
     {
       id: 'pdf-compressor',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      ),
+      icon: <Archive size={32} />,
       title: "PDF Compressor",
       description: "Reduce PDF file sizes without losing quality, perfect for easy sharing and storage.",
       path: "/services/pdfcompressor",
@@ -62,33 +44,22 @@ const Services = () => {
     },
     {
       id: 'pdf-merger',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      ),
+      icon: <Merge size={32} />,
       title: "PDF Merger",
       description: "Combine multiple PDF files into one document seamlessly with drag-and-drop ease.",
       path: "/services/pdfmerger",
       color: "from-yellow-500/20 to-amber-500/20",
       hoverColor: "group-hover:from-yellow-500/30 group-hover:to-amber-500/30"
     },
-        {
+    {
       id: 'image-converter',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M8 12h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        </svg>
-      ),
+      icon: <ImageIcon size={32} />,
       title: "Image Converter",
       description: "Convert HEIC, JPG, PNG, and WEBP instantly.",
       path: "/services/imageconverter",
       color: "from-yellow-500/20 to-amber-500/20",
       hoverColor: "group-hover:from-yellow-500/30 group-hover:to-amber-500/30"
     },
-  
   ]
 
   const handleServiceClick = (path) => {
@@ -192,16 +163,7 @@ const Services = () => {
                   {/* Arrow Link */}
                   <div className='flex items-center gap-2 text-[#A6FF5D] text-sm font-medium'>
                     <span>Get started</span>
-                    <svg 
-                      className="arrow-icon" 
-                      width="16" 
-                      height="16" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <ArrowRight className="arrow-icon" size={16} />
                   </div>
                 </div>
 

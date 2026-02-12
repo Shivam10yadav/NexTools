@@ -107,7 +107,7 @@ const Hero = () => {
         </div>
 
         <h1 className="text-4xl md:text-[64px]/[82px] text-center max-w-4xl mt-5 bg-clip-text leading-tight px-4">
-         Build powerful tools
+          powerful tools
 that simplify your workflow
         </h1>
         <p className="text-sm md:text-base text-gray-300 bg-clip-text text-center max-w-lg mt-4.5 px-4">
@@ -126,7 +126,7 @@ A fast and privacy-focused platform offering PDF utilities, QR generation and fi
             </div>
           </button>
           <div className="bg-white/15 hover:bg-white/10 p-px flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
-            <button className="px-6 text-sm py-3 text-white rounded-full bg-white/5 cursor-pointer">
+            <button id="services" className="px-6 text-sm py-3 text-white rounded-full bg-white/5 cursor-pointer">
               Our products
             </button>
           </div>
