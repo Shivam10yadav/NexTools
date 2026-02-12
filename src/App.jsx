@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Pdfcompressor from "./pages/PdfCompressor";
 import PdfMerger from "./pages/PdfMerger";
 import PageTransition from "./components/PageTransition";
+import ImageConverter from './pages/ImageConverter'
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function AnimatedRoutes() {
         <Route path="/services/pdfsplitter" element={<PageTransition><PDFSplitter /></PageTransition>} />
         <Route path="/services/pdfcompressor" element={<PageTransition><Pdfcompressor /></PageTransition>} />
         <Route path="/services/pdfmerger" element={<PageTransition><PdfMerger /></PageTransition>} />
+        <Route path="/services/imageconverter" element={<PageTransition><ImageConverter /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );
