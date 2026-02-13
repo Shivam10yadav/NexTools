@@ -17,7 +17,7 @@ import ImageConverter from './pages/ImageConverter';
 import PDFOrganizer from "./pages/pdfOrganizer";
 import PDFWatermarker from "./pages/pdfWatermarker";
 import PDFContentEditor from "./pages/pdfContentEditor";
-import ImageToPDF from "./pages/ImagetoPdf";
+import ImageToPDF from "./pages/ImageToPDF";
 import BackgroundRemover from "./pages/BackgroundRemover";
 import ColorPalette from "./pages/ColorPalette";
 import CodeToImage from "./pages/CodeToImage";
