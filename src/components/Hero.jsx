@@ -103,14 +103,16 @@ const Hero = () => {
         </div>
 
         {/* Hero Title */}
-        <h1 className="text-5xl md:text-[80px] font-bold text-center max-w-5xl mt-10 leading-[1] px-4 tracking-tighter relative z-10">
-          Tools that simplify your <br className="hidden md:block" />
-          <span className="text-blue-500">digital workflow.</span>
-        </h1>
-        
-        <p className="text-base md:text-xl text-white/30 text-center max-w-2xl mt-8 px-4 font-medium leading-relaxed relative z-10">
-          A lightning-fast, privacy-first platform offering PDF utilities, QR generation, and image tools—all processed directly in your browser.
-        </p>
+    
+<h1 className="text-5xl md:text-[85px] font-black text-center max-w-6xl mt-10 leading-[0.9] px-4 tracking-tighter relative z-10 italic uppercase">
+  The Ultimate <br className="hidden md:block" />
+  <span className="text-white/10">Digital Workshop.</span>
+</h1>
+
+<p className="text-base md:text-xl text-white/40 text-center max-w-3xl mt-8 px-6 font-medium leading-relaxed relative z-10">
+  Professional-grade tools for creators and developers. From <span className="text-white/80">PDF encryption</span> to <span className="text-white/80">AI image processing</span>, 
+  everything happens locally in your browser—your data never leaves your device.
+</p>
 
         {/* Buttons */}
         <div className="flex flex-col md:flex-row gap-5 mt-14 relative z-10">

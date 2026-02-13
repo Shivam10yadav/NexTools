@@ -1,29 +1,30 @@
 import React, { useState } from 'react'
+import { HelpCircle, ChevronDown, ShieldCheck, Cpu, Globe } from 'lucide-react'
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqs = [
     {
-      question: "How secure is my data when using your services?",
-      answer: "Your data security is our top priority. All files are encrypted during upload and processing using industry-standard SSL/TLS encryption. We automatically delete all processed files from our servers within 24 hours. We never share, sell, or store your documents permanently."
+      question: "How is my data handled?",
+      answer: "NexTools uses 'Zero-Server' logic. Your documents are processed entirely within your browser's RAM using WebAssembly. Unlike other tools, your files are never uploaded to a cloud, never stored on a disk, and never seen by our team. Your privacy is guaranteed by the laws of physics and local execution.",
+      icon: <ShieldCheck size={18} className="text-blue-500" />
     },
     {
-      question: "Is there a file size limit for uploads?",
-      answer: "Free users can upload files up to 25MB per file. Pro users enjoy increased limits of up to 100MB per file, while Enterprise users have custom limits tailored to their needs. You can process multiple files in batch mode regardless of your plan."
+      question: "Are there file size limits?",
+      answer: "Because processing happens on your device, the limit depends on your computer's RAM. Most modern browsers handle up to 2GB effortlessly. There are no 'Pro' tiers or artificial caps—the full power of your hardware is the only limit.",
+      icon: <Cpu size={18} className="text-purple-500" />
     },
     {
-      question: "What file formats do you support?",
-      answer: "We support a wide range of formats including TXT, MD, DOCX, PDF, PNG, JPG, and more. For conversions, we support Text to PDF, Markdown to PDF, and various image formats. QR codes can be generated for URLs, text, contact cards, and WiFi credentials."
+      question: "Do I need an internet connection?",
+      answer: "You only need a connection to load the website. Once the 'Lab' is open in your browser, the tools work entirely offline. You can even disconnect your WiFi while merging or encrypting your PDFs for ultimate peace of mind.",
+      icon: <Globe size={18} className="text-emerald-500" />
     },
     {
-      question: "Can I use these tools without creating an account?",
-      answer: "Yes! Our basic tools are available for immediate use without registration. However, creating a free account gives you access to batch processing, file history, higher upload limits, and the ability to save your preferences and templates."
-    },
-    {
-      question: "How long does it take to process files?",
-      answer: "Most files are processed instantly, usually within 1-3 seconds. Larger files or batch operations may take up to 30 seconds. We use high-performance servers to ensure the fastest possible processing times while maintaining quality."
-    },
+      question: "Why is NexTools free?",
+      answer: "Traditional tools charge you because they have to pay for expensive servers to process your files. We shifted the work to your device. Since we don't have server costs for file handling, we pass those savings directly to you—forever.",
+      icon: <HelpCircle size={18} className="text-orange-500" />
+    }
   ]
 
   const toggleAccordion = (index) => {
@@ -34,117 +35,85 @@ const FAQ = () => {
     <>
       <style>
         {`
-          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-          * { font-family: "Poppins", sans-serif; }
-          
           .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-                        opacity 0.4s ease,
-                        padding 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
           }
           
           .faq-answer.open {
-            max-height: 500px;
+            max-height: 300px;
             opacity: 1;
-            padding-bottom: 1.5rem;
-          }
-          
-          .rotate-icon {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-          
-          .rotate-icon.open {
-            transform: rotate(180deg);
-          }
-          
-          .faq-card {
-            transition: all 0.3s ease;
-          }
-          
-          .faq-card.active {
-            border-color: rgba(59, 130, 246, 0.4) !important;
-            background: rgba(255, 255, 255, 0.03) !important;
+            padding-bottom: 2rem;
           }
         `}
       </style>
 
-      <section id='faq' className='bg-[#0a0a0c] text-white py-20 md:py-28 px-4 relative'>
-        {/* Sublte Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,#1d4ed808_0%,transparent_70%)] pointer-events-none" />
-
-        <div className='max-w-4xl mx-auto relative z-10'>
+      <section id='faq' className='bg-[#0a0a0c] text-white py-32 px-6 relative'>
+        <div className='max-w-5xl mx-auto relative z-10'>
+          
           {/* Section Header */}
-          <div className='text-center mb-16'>
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-              </span>
-              <span className='text-[10px] uppercase tracking-widest font-bold text-white/50'>Common Questions</span>
+          <div className='flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8'>
+            <div>
+              <h2 className='text-[10px] font-black uppercase tracking-[5px] text-blue-500 mb-6'>Inquiries</h2>
+              <h3 className='text-5xl md:text-7xl font-black tracking-tighter uppercase italic leading-[0.85]'>
+                Clearing the <br /> 
+                <span className="text-white/20">Confusion.</span>
+              </h3>
             </div>
-            
-            <h2 className='text-4xl md:text-5xl font-bold mb-6 tracking-tight'>
-              Frequently Asked <span className="text-blue-500">Questions</span>
-            </h2>
-            <p className='text-gray-400 text-lg max-w-2xl mx-auto'>
-              Everything you need to know about NexTools. Secure, private, and always available.
+            <p className='text-white/40 text-lg max-w-xs font-medium leading-tight mb-2'>
+              Deep dives into how our browser-side workstation actually works.
             </p>
           </div>
 
           {/* FAQ Accordion */}
-          <div className='space-y-4'>
+          <div className='grid grid-cols-1 gap-4'>
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className={`faq-card bg-white/[0.02] border border-white/5 rounded-3xl overflow-hidden hover:border-white/10 transition-all duration-300 ${
-                  openIndex === index ? 'active shadow-2xl shadow-blue-500/5' : ''
+                className={`group border-b border-white/5 transition-all duration-500 ${
+                  openIndex === index ? 'bg-white/[0.02]' : 'hover:bg-white/[0.01]'
                 }`}
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className='w-full flex items-center justify-between p-6 md:p-8 text-left transition-colors duration-200'
+                  className='w-full flex items-center justify-between py-10 px-4 md:px-8 text-left'
                 >
-                  <h3 className={`text-lg md:text-xl font-semibold transition-colors ${openIndex === index ? 'text-blue-400' : 'text-white'}`}>
-                    {faq.question}
-                  </h3>
+                  <div className="flex items-center gap-6">
+                    <div className={`transition-all duration-500 ${openIndex === index ? 'scale-125 opacity-100' : 'opacity-20 grayscale'}`}>
+                        {faq.icon}
+                    </div>
+                    <h3 className={`text-xl md:text-2xl font-bold tracking-tight transition-colors ${openIndex === index ? 'text-white' : 'text-white/40 group-hover:text-white/70'}`}>
+                      {faq.question}
+                    </h3>
+                  </div>
                   
-                  <div className={`rotate-icon ${openIndex === index ? 'open text-blue-500' : 'text-white/20'}`}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                  <div className={`transition-transform duration-500 ${openIndex === index ? 'rotate-180 text-blue-500' : 'text-white/20'}`}>
+                    <ChevronDown size={24} strokeWidth={3} />
                   </div>
                 </button>
 
-                <div className={`faq-answer px-6 md:px-8 ${openIndex === index ? 'open' : ''}`}>
-                  <div className='border-t border-white/5 pt-6'>
-                    <p className='text-white/50 leading-relaxed text-sm md:text-base'>
+                <div className={`faq-answer px-10 md:px-24 ${openIndex === index ? 'open' : ''}`}>
+                    <p className='text-white/40 leading-relaxed text-base md:text-lg max-w-3xl'>
                       {faq.answer}
                     </p>
-                  </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Contact CTA */}
-          <div className='mt-20 text-center bg-blue-600/5 border border-blue-500/10 rounded-[40px] p-8 md:p-16'>
-            <h3 className='text-2xl md:text-3xl font-bold mb-4'>
-              Still have questions?
-            </h3>
-            <p className='text-white/40 mb-10 max-w-xl mx-auto'>
-              Our team is ready to help you with any custom document needs or technical issues.
-            </p>
-            
-            <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
-              <button className="bg-blue-600 hover:bg-blue-500 text-white px-10 py-4 rounded-2xl text-sm font-bold transition shadow-xl shadow-blue-600/20 active:scale-95">
-                Contact Support
-              </button>
-              
-              <button className="bg-white/5 hover:bg-white/10 text-white px-10 py-4 rounded-2xl text-sm font-bold transition border border-white/10">
-                View Docs
-              </button>
-            </div>
+          {/* Minimal CTA */}
+          <div className='mt-32 p-1 bg-gradient-to-r from-blue-600/20 via-transparent to-transparent rounded-[40px]'>
+              <div className="bg-[#0d0d12] rounded-[38px] p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10">
+                  <div className="max-w-md text-center md:text-left">
+                      <h4 className="text-3xl font-black italic uppercase tracking-tighter mb-4">Still Skeptical?</h4>
+                      <p className="text-white/30 font-medium">Read our technical documentation on how WebAssembly handles your local data streams.</p>
+                  </div>
+                  <button className="whitespace-nowrap bg-white text-black px-12 py-5 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95">
+                      Technical Docs
+                  </button>
+              </div>
           </div>
         </div>
       </section>

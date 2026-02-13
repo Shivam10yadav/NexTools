@@ -17,6 +17,11 @@ import ImageConverter from './pages/ImageConverter';
 import PDFOrganizer from "./pages/pdfOrganizer";
 import PDFWatermarker from "./pages/pdfWatermarker";
 import PDFContentEditor from "./pages/pdfContentEditor";
+import ImageToPDF from "./pages/ImagetoPdf";
+import BackgroundRemover from "./pages/BackgroundRemover";
+import ColorPalette from "./pages/ColorPalette";
+import CodeToImage from "./pages/CodeToImage";
+import PDFProtect from "./pages/PDFProtect";
 
 // --- Layout Wrapper for Conditional Sidebar ---
 const LayoutWrapper = ({ children }) => {
@@ -51,6 +56,11 @@ function AnimatedRoutes() {
         <Route path="/services/pdforganizer" element={<PageTransition><PDFOrganizer /></PageTransition>} />
         <Route path="/services/pdfwatermarker" element={<PageTransition><PDFWatermarker /></PageTransition>} />
         <Route path="/services/pdfeditor" element={<PageTransition><PDFContentEditor /></PageTransition>} />
+        <Route path="/services/imagetopdf" element={<PageTransition><ImageToPDF /></PageTransition>} />
+        <Route path="/services/backgroundremover" element={<PageTransition><BackgroundRemover /></PageTransition>} />
+        <Route path="/services/colorpalette" element={<PageTransition><ColorPalette /></PageTransition>} />
+        <Route path="/services/codetoimage" element={<PageTransition><CodeToImage /></PageTransition>} />
+        <Route path="/services/pdfprotect" element={<PageTransition><PDFProtect /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   );

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { 
   Home, Layers, Scissors, Hash, Minimize2, 
-  ShieldAlert, Edit3, Image as ImageIcon, QrCode, FileText, X, LayoutGrid 
+  ShieldAlert, Edit3, Image as ImageIcon, QrCode, FileText, X, LayoutGrid,
+  FileStack ,Wand2,
+  Palette,
+  Code2,
+  Lock
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -15,15 +19,19 @@ const Sidebar = () => {
     { name: 'Organizer', path: '/services/pdforganizer', icon: Hash },
     { name: 'Compressor', path: '/services/pdfcompressor', icon: Minimize2 },
     { name: 'Watermarker', path: '/services/pdfwatermarker', icon: ShieldAlert },
+    { name: 'Pdf Protect', path: '/services/pdfprotect', icon: Lock },
     { name: 'Editor', path: '/services/pdfeditor', icon: Edit3 },
     { name: 'Image Conv.', path: '/services/imageconverter', icon: ImageIcon },
+    { name: 'Color Extrac.', path: '/services/colorpalette', icon: Palette },
+    { name: 'Code Snippets', path: '/services/codetoimage', icon: Code2 },
     { name: 'QR Gen', path: '/services/qrgenerator', icon: QrCode },
     { name: 'Text to PDF', path: '/services/texttopdf', icon: FileText },
+    { name: 'Image To PDF', path: '/services/imagetopdf', icon: FileStack }, 
+    { name: 'Background Remover', path: '/services/backgroundremover', icon: Wand2 }, 
   ];
 
   return (
     <>
-      {/* CSS to hide scrollbar globally for the sidebar */}
       <style>
         {`
           .no-scrollbar::-webkit-scrollbar {
@@ -39,18 +47,16 @@ const Sidebar = () => {
       {/* --- DESKTOP SIDEBAR --- */}
       <nav className="fixed left-0 top-0 h-screen w-20 hover:w-64 bg-[#0d0d12]/90 backdrop-blur-2xl border-r border-white/5 transition-all duration-300 group z-[100] hidden md:flex flex-col py-8 overflow-hidden">
         
-        {/* Brand Logo - Now links to Home */}
         <Link to="/" className="px-5 mb-12 flex items-center gap-4 cursor-pointer">
           <div className="relative flex-shrink-0">
             <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full group-hover:bg-blue-500/40 transition-all" />
             <img src="/NexTools.png" alt="NexTools Logo" className="relative w-10 h-10 object-contain" />
           </div>
           <span className="font-bold text-xl tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white select-none">
-            NexTools
+            Nex<span className="text-blue-500">Tools</span>
           </span>
         </Link>
 
-        {/* Navigation Items - Scrollbar hidden here */}
         <div className="flex-1 px-3 space-y-2 overflow-y-auto no-scrollbar">
           {navItems.map((item) => (
             <NavLink 
@@ -70,7 +76,7 @@ const Sidebar = () => {
         </div>
       </nav>
 
-      {/* --- MOBILE DRAWER (Scrollbar also hidden) --- */}
+      {/* --- MOBILE DRAWER --- */}
       {isDrawerOpen && (
         <div className="fixed inset-0 z-[150] bg-[#0a0a0c] p-6 animate-in slide-in-from-bottom duration-300 md:hidden overflow-y-auto no-scrollbar">
           <div className="flex justify-between items-center mb-8">

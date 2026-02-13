@@ -6,17 +6,18 @@ import FAQ from '../components/FAQ'
 import Pricing from '../components/Pricing'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import About from '../components/About'
 
 const Home = () => {
   return (
     <>
-  <Hero/>
-    {/* <Features/> */}
-    <Services/>
-    <FAQ/>
-    <Pricing/>
-    <Contact/>
-    <Footer/>
+      <Hero />
+      <About />      
+      <Services />   
+      <FAQ />        
+      <Pricing />    
+      <Contact />   
+      <Footer />
     </>
   )
 }

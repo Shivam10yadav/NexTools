@@ -1,116 +1,119 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { 
-  Merge, ShieldAlert, Edit3, ArrowRight, LayoutGrid 
+  Merge, ShieldAlert, Edit3, ArrowRight, LayoutGrid, Zap 
 } from 'lucide-react'
 
 const Services = () => {
   const navigate = useNavigate()
 
-  // These are the 3 "Featured" services shown on the Home Page
   const featuredServices = [
     {
       id: 'pdf-merger',
-      icon: <Merge size={32} />,
+      icon: <Merge size={28} />,
       title: "PDF Merger",
-      description: "Combine multiple PDF files into one document seamlessly with drag-and-drop ease.",
+      tag: "Workflow",
+      description: "Combine multiple PDF files into one high-fidelity document seamlessly with instant local processing.",
       path: "/services/pdfmerger",
-      color: "from-blue-500/20 to-cyan-500/20",
+      accent: "text-blue-500",
+      glow: "shadow-blue-500/10",
     },
     {
       id: 'pdf-watermarker',
-      icon: <ShieldAlert size={32} />,
-      title: "PDF Watermarker",
-      description: "Protect your documents with custom text or image watermarks and tile patterns.",
+      icon: <ShieldAlert size={28} />,
+      title: "Document Shield",
+      tag: "Security",
+      description: "Inject custom text or image watermarks with tile patterns to protect your intellectual property.",
       path: "/services/pdfwatermarker",
-      color: "from-purple-500/20 to-pink-500/20",
+      accent: "text-purple-500",
+      glow: "shadow-purple-500/10",
     },
     {
       id: 'pdf-editor',
-      icon: <Edit3 size={32} />,
-      title: "Content Editor",
-      description: "Modify metadata, redact sensitive information, and inject text into existing PDFs.",
+      icon: <Edit3 size={28} />,
+      title: "Meta Editor",
+      tag: "Utility",
+      description: "Modify document metadata, redact sensitive fields, and inject text strings without cloud dependency.",
       path: "/services/pdfeditor",
-      color: "from-green-500/20 to-emerald-500/20",
+      accent: "text-emerald-500",
+      glow: "shadow-emerald-500/10",
     }
   ]
 
   return (
-    <>
-      <style>
-        {`
-          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-          .services-font { font-family: "Poppins", sans-serif; }
-          
-          .service-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          }
-          
-          .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(59, 130, 246, 0.5);
-          }
-        `}
-      </style>
-
-      <section id='services' className='services-font bg-[#0a0a0c] text-white py-24 px-4 relative overflow-hidden'>
-        <div className='max-w-7xl mx-auto relative z-10'>
-          
-          {/* Header */}
-          <div className='text-center max-w-3xl mx-auto mb-16'>
-            <h2 className='text-4xl md:text-5xl font-bold mb-6 tracking-tight'>
-              Choose a <span className="text-blue-500">Service</span>
+    <section id='services' className='bg-[#0a0a0c] text-white py-32 px-6 relative overflow-hidden'>
+      {/* Background Decor */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      
+      <div className='max-w-7xl mx-auto relative z-10'>
+        
+        {/* Header Section */}
+        <div className='flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8'>
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+              <Zap size={12} className="text-blue-500" />
+              <span className="text-[10px] font-black uppercase tracking-[3px] text-white/50">Production Ready</span>
+            </div>
+            <h2 className='text-5xl md:text-7xl font-black tracking-tighter uppercase italic leading-none'>
+              The <span className="text-blue-500">Service</span> <br /> 
+              <span className="text-white/20">Directory.</span>
             </h2>
-            <p className='text-gray-400 text-lg'>
-              Select a tool to get started, or explore our full suite of document processors.
-            </p>
           </div>
+          <p className='text-white/40 text-lg max-w-sm font-medium leading-tight mb-2'>
+            High-performance tools optimized for speed and built for absolute privacy.
+          </p>
+        </div>
 
-          {/* Grid: Always shows exactly 3 */}
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-            {featuredServices.map((service) => (
-              <div
-                key={service.id}
-                onClick={() => navigate(service.path)}
-                className='service-card group relative bg-white/[0.03] border border-white/10 rounded-3xl p-8 cursor-pointer overflow-hidden'
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+        {/* Grid System */}
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
+          {featuredServices.map((service) => (
+            <div
+              key={service.id}
+              onClick={() => navigate(service.path)}
+              className={`group relative bg-[#111116] border border-white/5 rounded-[40px] p-10 cursor-pointer transition-all duration-500 hover:border-white/20 hover:bg-[#16161d] shadow-2xl ${service.glow}`}
+            >
+              {/* Corner Tag */}
+              <div className="absolute top-8 right-8 text-[9px] font-black uppercase tracking-widest text-white/20 group-hover:text-white/40 transition-colors">
+                {service.tag}
+              </div>
+
+              <div className='relative z-10'>
+                {/* Icon Container */}
+                <div className={`w-16 h-16 rounded-[24px] bg-white/5 flex items-center justify-center ${service.accent} mb-10 group-hover:scale-110 group-hover:bg-white/10 transition-all duration-500`}>
+                  {service.icon}
+                </div>
                 
-                <div className='relative z-10'>
-                  <div className='w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-6 group-hover:bg-blue-500 group-hover:text-white transition-all'>
-                    {service.icon}
-                  </div>
-                  
-                  <h3 className='text-xl font-bold mb-3'>{service.title}</h3>
-                  <p className='text-gray-400 text-sm leading-relaxed mb-8'>{service.description}</p>
-                  
-                  <div className='flex items-center gap-2 text-blue-500 text-sm font-bold uppercase tracking-widest'>
-                    <span>Start Now</span>
-                    <ArrowRight className="transition-transform group-hover:translate-x-2" size={16} />
-                  </div>
+                <h3 className='text-2xl font-bold mb-4 tracking-tight'>{service.title}</h3>
+                <p className='text-white/30 text-sm leading-relaxed mb-10 min-h-[60px]'>{service.description}</p>
+                
+                {/* Action Link */}
+                <div className={`flex items-center gap-3 ${service.accent} text-[11px] font-black uppercase tracking-[2px] opacity-60 group-hover:opacity-100 transition-all`}>
+                  <span>Initialize Tool</span>
+                  <div className="w-8 h-px bg-current transition-all group-hover:w-12" />
+                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* THE MAIN BUTTON: Takes user to the first service (Merger) */}
-          <div className='mt-20 text-center'>
-            <button 
-              onClick={() => navigate('/services/pdfmerger')}
-              className="group relative inline-flex items-center gap-3 bg-white text-black hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-bold transition-all duration-300 shadow-2xl active:scale-95"
-            >
-              <LayoutGrid size={20} />
-              VIEW ALL SERVICES
-              {/* This subtle hint tells the user they can navigate inside */}
-              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-48 text-[10px] text-white/20 uppercase tracking-[4px] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                Explore via Sidebar
-              </div>
-            </button>
-          </div>
-
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+
+        {/* Call to Action */}
+        <div className='mt-24 flex flex-col items-center'>
+          <button 
+            onClick={() => navigate('/services/pdfmerger')}
+            className="group relative flex items-center gap-4 bg-white text-black px-14 py-6 rounded-[24px] font-black text-xs uppercase tracking-[3px] transition-all hover:bg-blue-600 hover:text-white hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.1)]"
+          >
+            <LayoutGrid size={18} />
+            Explore Full Ecosystem
+          </button>
+          
+          <p className="mt-8 text-[10px] font-bold text-white/10 uppercase tracking-[5px] animate-pulse">
+            Local Processing • No Cloud
+          </p>
+        </div>
+
+      </div>
+    </section>
   )
 }
 
