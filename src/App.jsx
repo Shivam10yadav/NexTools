@@ -8,29 +8,33 @@ import PageTransition from "./components/PageTransition";
 
 // Pages
 import Home from "./pages/Home";
+import ServicesHub from "./pages/ServicesHub"; // New Hub Page
 import QRGenerator from "./pages/QRGenerator";
-import TextToPDF from "./pages/textToPdf";
-import PDFSplitter from "./pages/pdfSplitter";
+import TextToPDF from "./pages/textToPdf"; // Matched casing to your file system
+import PDFSplitter from "./pages/pdfSplitter"; 
 import Pdfcompressor from "./pages/PdfCompressor";
 import PdfMerger from "./pages/PdfMerger";
 import ImageConverter from './pages/ImageConverter';
 import PDFOrganizer from "./pages/pdfOrganizer";
 import PDFWatermarker from "./pages/pdfWatermarker";
 import PDFContentEditor from "./pages/pdfContentEditor";
-import ImageToPDF from "./pages/ImageToPDF";
+import ImageToPDF from "./pages/ImageToPDF"; // Corrected casing
 import BackgroundRemover from "./pages/BackgroundRemover";
 import ColorPalette from "./pages/ColorPalette";
 import CodeToImage from "./pages/CodeToImage";
 import PDFProtect from "./pages/PDFProtect";
+import NotFound from "./pages/NotFound";
 
-// --- Layout Wrapper for Conditional Sidebar ---
+// --- Layout Wrapper ---
 const LayoutWrapper = ({ children }) => {
   const location = useLocation();
-  // Sidebar stays hidden on the Home page ("/")
+  
+  // Sidebar only hides on the Hero/Home page
   const isHomePage = location.pathname === "/";
 
   return (
     <div className="flex bg-[#0a0a0c] min-h-screen text-white selection:bg-blue-500/30">
+      {/* Sidebar now shows on /services AND all /services/tool-name paths */}
       {!isHomePage && <Sidebar />}
       
       <main className={`flex-1 w-full transition-all duration-500 ${!isHomePage ? 'md:ml-20 pb-20 md:pb-0' : ''}`}>
@@ -46,7 +50,13 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        {/* Landing Page */}
         <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+
+        {/* Services Hub (The separate page you wanted) */}
+        <Route path="/services" element={<PageTransition><ServicesHub /></PageTransition>} />
+
+        {/* Individual Tools */}
         <Route path="/services/qrgenerator" element={<PageTransition><QRGenerator /></PageTransition>} />
         <Route path="/services/texttopdf" element={<PageTransition><TextToPDF /></PageTransition>} />
         <Route path="/services/pdfsplitter" element={<PageTransition><PDFSplitter /></PageTransition>} />
@@ -61,6 +71,8 @@ function AnimatedRoutes() {
         <Route path="/services/colorpalette" element={<PageTransition><ColorPalette /></PageTransition>} />
         <Route path="/services/codetoimage" element={<PageTransition><CodeToImage /></PageTransition>} />
         <Route path="/services/pdfprotect" element={<PageTransition><PDFProtect /></PageTransition>} />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   );

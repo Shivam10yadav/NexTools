@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -20,7 +21,7 @@ const Hero = () => {
             position: relative;
             z-index: 0;
             overflow: hidden;
-            padding: 1.5px; /* Border thickness */
+            padding: 1.5px;
           }
 
           .rainbow::before {
@@ -50,8 +51,87 @@ const Hero = () => {
             background: #0d0d12;
             border-radius: 9999px;
           }
+
+          /* Mobile Menu Styles */
+          .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: #0a0a0c;
+            transition: right 0.3s ease;
+            z-index: 100;
+            border-left: 1px solid rgba(255,255,255,0.05);
+          }
+
+          .mobile-menu.open {
+            right: 0;
+          }
+
+          .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.8);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 99;
+          }
+
+          .mobile-overlay.open {
+            opacity: 1;
+            visibility: visible;
+          }
         `}
       </style>
+
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`mobile-overlay ${mobileOpen ? 'open' : ''}`}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
+        <div className="flex flex-col h-full">
+          {/* Mobile Menu Header */}
+          <div className="flex items-center justify-between p-6 border-b border-white/5">
+            <div className="flex items-center gap-3">
+              <img src="/NexTools.png" alt="Logo" className="w-8 h-8 object-contain" />
+              <h2 className="text-2xl font-bold tracking-tighter">
+                Nex<span className="text-blue-500">Tools</span>
+              </h2>
+            </div>
+            <button 
+              onClick={() => setMobileOpen(false)}
+              className="text-white/50 hover:text-white transition"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Menu Links */}
+          <div className="flex flex-col gap-2 p-6">
+            {['home', 'about', 'services', 'faq', 'pricing', 'contact', 'footer'].map((item) => (
+              <a
+                key={item}
+                href={`#${item}`}
+                onClick={() => setMobileOpen(false)}
+                className="text-white/60 hover:text-blue-500 transition-colors duration-300 py-4 text-lg font-semibold uppercase tracking-wider border-b border-white/5"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <header id="home" className="bg-[#0a0a0c] text-white flex flex-col items-center relative overflow-hidden pb-24">
         
@@ -73,7 +153,7 @@ const Hero = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-10 text-[11px] font-black uppercase tracking-[2px]">
-              {['home', 'services', 'faq', 'pricing', 'contact'].map((item) => (
+              {['home', 'about', 'services', 'faq', 'pricing', 'contact', 'footer'].map((item) => (
                 <a 
                   key={item}
                   href={`#${item}`} 
@@ -85,8 +165,13 @@ const Hero = () => {
             </div>
 
             {/* Mobile Menu Button */}
-            <button onClick={() => setMobileOpen(true)} className="md:hidden text-white/50 hover:text-white transition">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <button 
+              onClick={() => setMobileOpen(true)} 
+              className="md:hidden text-white/50 hover:text-white transition"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
           </div>
         </nav>
@@ -103,26 +188,29 @@ const Hero = () => {
         </div>
 
         {/* Hero Title */}
-    
-<h1 className="text-5xl md:text-[85px] font-black text-center max-w-6xl mt-10 leading-[0.9] px-4 tracking-tighter relative z-10 italic uppercase">
-  The Ultimate <br className="hidden md:block" />
-  <span className="text-white/10">Digital Workshop.</span>
-</h1>
+        <h1 className="text-5xl md:text-[85px] font-black text-center max-w-6xl mt-10 leading-[0.9] px-4 tracking-tighter relative z-10 italic uppercase">
+          The Ultimate <br className="hidden md:block" />
+          <span className="text-white/10">Digital Workshop.</span>
+        </h1>
 
-<p className="text-base md:text-xl text-white/40 text-center max-w-3xl mt-8 px-6 font-medium leading-relaxed relative z-10">
-  Professional-grade tools for creators and developers. From <span className="text-white/80">PDF encryption</span> to <span className="text-white/80">AI image processing</span>, 
-  everything happens locally in your browser—your data never leaves your device.
-</p>
+        <p className="text-base md:text-xl text-white/40 text-center max-w-3xl mt-8 px-6 font-medium leading-relaxed relative z-10">
+          Professional-grade tools for creators and developers. From <span className="text-white/80">PDF encryption</span> to <span className="text-white/80">AI image processing</span>, 
+          everything happens locally in your browser—your data never leaves your device.
+        </p>
 
         {/* Buttons */}
         <div className="flex flex-col md:flex-row gap-5 mt-14 relative z-10">
-          <button className="bg-blue-600 hover:bg-blue-500 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 active:scale-95">
-            Get Started Today
-          </button>
+          <Link to="/services">
+            <button className="bg-blue-600 hover:bg-blue-500 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 active:scale-95">
+              Get Started Today
+            </button>
+          </Link>
           
-          <button className="px-12 py-5 text-sm font-black uppercase tracking-widest text-white/70 rounded-2xl border border-white/10 hover:bg-white/5 transition-all">
-            Our Products
-          </button>
+          <Link to="/services">
+            <button className="px-12 py-5 text-sm font-black uppercase tracking-widest text-white/70 rounded-2xl border border-white/10 hover:bg-white/5 transition-all">
+              Our Tools
+            </button>
+          </Link>
         </div>
 
         {/* Scroll Indicator */}

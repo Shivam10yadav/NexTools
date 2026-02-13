@@ -4,7 +4,11 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStr
 import { CSS } from '@dnd-kit/utilities';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
-import { Upload, FileText, Download, Trash2, GripVertical, RefreshCw, AlertCircle, Layers } from 'lucide-react';
+import { 
+  Upload, FileText, Download, Trash2, GripVertical, 
+  RefreshCw, AlertCircle, Layers, ChevronLeft, 
+  ShieldCheck, Activity 
+} from 'lucide-react';
 
 // Setup Worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
@@ -23,47 +27,47 @@ const SortablePage = ({ page, onRemove }) => {
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group aspect-[3/4] bg-[#1a1a20] rounded-xl border-2 overflow-hidden transition-all ${
-        isDragging ? "border-blue-500 shadow-2xl scale-105 opacity-50" : "border-white/5 hover:border-white/20"
+      className={`relative group aspect-[3/4] bg-[#1a1a20] rounded-[20px] border-2 overflow-hidden transition-all duration-300 ${
+        isDragging ? "border-blue-500 shadow-[0_0_40px_rgba(37,99,235,0.3)] scale-105 z-50" : "border-white/5 hover:border-white/20"
       }`}
     >
-      {/* 1. Enhanced Drag Handle with Hint (User must drag from here) */}
+      {/* Enhanced Drag Handle */}
       <div 
         {...attributes} 
         {...listeners} 
-        className="absolute top-2 left-2 flex items-center gap-2 p-1.5 bg-blue-600 rounded-lg cursor-grab active:cursor-grabbing z-20 shadow-lg border border-blue-400/30 group-hover:scale-105 transition-transform"
+        className="absolute top-3 left-3 flex items-center gap-2 p-2 bg-blue-600 rounded-xl cursor-grab active:cursor-grabbing z-20 shadow-xl border border-blue-400/30 group-hover:scale-105 transition-transform"
       >
         <GripVertical className="w-4 h-4 text-white" />
-        <span className="text-[9px] font-bold text-white uppercase pr-1 hidden group-hover:block animate-in fade-in slide-in-from-left-1">
-          Drag to Move
+        <span className="text-[8px] font-black text-white uppercase tracking-tighter hidden group-hover:block animate-in fade-in slide-in-from-left-1">
+          REORDER
         </span>
       </div>
 
-      {/* 2. Remove Button */}
+      {/* Remove Button */}
       <button 
         onClick={() => onRemove(page.id)}
-        className="absolute top-2 right-2 p-1.5 bg-red-500/10 hover:bg-red-500 backdrop-blur-md rounded-lg opacity-0 group-hover:opacity-100 transition-all z-20 text-red-400 hover:text-white border border-red-500/20"
+        className="absolute top-3 right-3 p-2 bg-red-500/10 hover:bg-red-500 backdrop-blur-md rounded-xl opacity-0 group-hover:opacity-100 transition-all z-20 text-red-400 hover:text-white border border-red-500/20"
       >
         <Trash2 className="w-3.5 h-3.5" />
       </button>
 
-      {/* 3. Page Preview */}
-      <div className="w-full h-full p-3 pt-10">
+      {/* Page Preview */}
+      <div className="w-full h-full p-4 pt-12">
         {page.thumbnail ? (
           <img 
             src={page.thumbnail} 
             alt={`Page ${page.originalIndex + 1}`} 
-            className="w-full h-full object-contain rounded shadow-sm select-none pointer-events-none" 
+            className="w-full h-full object-contain rounded-lg shadow-2xl select-none pointer-events-none grayscale group-hover:grayscale-0 transition-all duration-500" 
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-white/5 rounded">
+          <div className="w-full h-full flex items-center justify-center bg-white/5 rounded-lg">
             <FileText className="w-8 h-8 text-white/10" />
           </div>
         )}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 py-1.5 bg-black/80 backdrop-blur-sm text-[10px] text-center font-bold tracking-widest text-white/50 border-t border-white/5">
-        PAGE {page.originalIndex + 1}
+      <div className="absolute bottom-0 left-0 right-0 py-2 bg-black/80 backdrop-blur-md text-[9px] text-center font-black tracking-[3px] text-white/30 border-t border-white/5 uppercase">
+        Section {page.originalIndex + 1}
       </div>
     </div>
   );
@@ -165,103 +169,130 @@ const PDFOrganizer = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0c] text-white/90 flex flex-col items-center p-6 md:p-12 font-sans relative selection:bg-blue-500/30">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_50%_0%,#14141a_0%,#0a0a0c_70%)] pointer-events-none" />
+    <div className="min-h-screen bg-[#0a0a0c] text-white p-6 pt-32 relative overflow-hidden selection:bg-blue-500/30">
+      
+      {/* --- BACKGROUND AMBIENCE --- */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#2563eb 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] pointer-events-none" />
 
-      <header className="relative text-center mb-10 w-full max-w-[1000px]">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Page Organizer</h1>
-        <p className="text-white/60">Drag the <span className="text-blue-400 font-bold">blue handles</span> to reorder pages</p>
-      </header>
-
-      <main className="relative z-10 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 w-full max-w-[1300px]">
+      <main className="max-w-7xl mx-auto relative z-10">
         
-        {/* Sidebar */}
-        <aside className="space-y-4">
-          <div className="bg-[#111115] border border-white/10 rounded-2xl p-6 shadow-2xl sticky top-6">
-            <div className="flex items-center gap-2 mb-6 text-blue-400 font-semibold uppercase text-xs tracking-widest">
-              <Layers className="w-4 h-4" /> Tools
+        {/* --- HEADER --- */}
+        <header className="mb-12">
+          <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/40 hover:text-blue-400 mb-6 transition group">
+            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
+          </button>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
+            <Activity size={12} className="text-blue-400 animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-[2px] text-blue-400">Sequential Engine v3.1</span>
+          </div>
+          <h1 className="text-5xl font-black italic uppercase tracking-tight">
+            Page <span className="text-blue-600 drop-shadow-[0_0_20px_rgba(37,99,235,0.4)]">Organizer</span>
+          </h1>
+          <p className="text-white/40 mt-3 font-medium">Restructure and reorder document flow with surgical precision.</p>
+        </header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8">
+          
+          {/* --- SIDEBAR CONTROLS --- */}
+          <aside className="space-y-6">
+            <div className="bg-white/[0.03] border border-white/5 rounded-[24px] p-6 shadow-2xl backdrop-blur-md sticky top-32">
+              <div className="flex items-center gap-2 mb-6 text-blue-400 font-bold uppercase text-[10px] tracking-widest">
+                <Layers className="w-4 h-4" /> Control Tower
+              </div>
+
+              <div className="space-y-4">
+                <button 
+                  onClick={saveOrganizedPDF}
+                  disabled={pages.length === 0 || isSaving}
+                  className="w-full py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-blue-500 disabled:opacity-20 transition-all shadow-xl shadow-blue-900/20"
+                >
+                  {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                  Finalize & Export
+                </button>
+
+                <button 
+                  onClick={() => { setFile(null); setPages([]); }}
+                  className="w-full py-2 text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-red-500 transition-colors"
+                >
+                  Purge Workspace
+                </button>
+
+                {pages.length > 0 && (
+                  <div className="pt-6 border-t border-white/5">
+                    <p className="text-[9px] text-white/20 font-black uppercase tracking-[0.2em] mb-2">Target Payload</p>
+                    <div className="flex items-baseline gap-2 bg-white/5 p-4 rounded-2xl border border-white/5">
+                      <span className="text-3xl font-black italic text-blue-500 leading-none">{pages.length}</span>
+                      <span className="text-[10px] text-white/40 uppercase font-black">Pages in Queue</span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="space-y-4">
-              <button 
-                onClick={saveOrganizedPDF}
-                disabled={pages.length === 0 || isSaving}
-                className="w-full py-4 bg-white text-black rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/90 disabled:opacity-20 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-              >
-                {isSaving ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
-                Download Organized PDF
-              </button>
+            <div className="p-6 bg-blue-500/5 border border-blue-500/10 rounded-[24px] flex gap-3">
+              <ShieldCheck className="text-blue-500 shrink-0" size={20} />
+              <p className="text-[10px] leading-relaxed text-blue-200/50 font-bold uppercase tracking-wider">
+                Memory-only processing. No data footprints left behind.
+              </p>
+            </div>
+          </aside>
 
-              <button 
-                onClick={() => { setFile(null); setPages([]); }}
-                className="w-full py-3 border border-white/5 bg-white/[0.02] text-white/40 rounded-xl text-xs hover:text-red-400 hover:border-red-500/20 transition-all"
-              >
-                Clear All
-              </button>
-
-              {pages.length > 0 && (
-                <div className="pt-6 border-t border-white/5">
-                  <p className="text-[10px] text-white/30 uppercase tracking-[0.2em] mb-1">Final Page Count</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-blue-500">{pages.length}</span>
-                    <span className="text-xs text-white/20 uppercase font-bold">Pages</span>
-                  </div>
+          {/* --- WORKSPACE --- */}
+          <section className="bg-white/[0.03] border border-white/5 rounded-[32px] min-h-[600px] flex flex-col relative overflow-hidden shadow-2xl backdrop-blur-sm">
+            <div className="px-8 py-5 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+              <span className="text-[10px] font-black uppercase tracking-[3px] text-white/30">Organization Deck</span>
+              {isLoading && (
+                <div className="flex items-center gap-2 text-blue-400 text-[10px] font-black uppercase animate-pulse">
+                  <RefreshCw className="w-3 h-3 animate-spin" /> Syncing Buffer...
                 </div>
               )}
             </div>
-          </div>
-        </aside>
 
-        {/* Workspace */}
-        <section className="bg-[#111115] border border-white/10 rounded-3xl shadow-2xl flex flex-col min-h-[600px]">
-          <div className="px-8 py-4 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-white/40">Organizer Workspace</span>
-            {isLoading && (
-              <div className="flex items-center gap-2 text-blue-400 text-[10px] font-bold uppercase animate-pulse">
-                <RefreshCw className="w-3 h-3 animate-spin" /> Processing Documents
-              </div>
-            )}
-          </div>
-
-          <div className="flex-1 p-8">
-            {!file ? (
-              <div 
-                className="h-full border-2 border-dashed border-white/5 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/30 hover:bg-blue-500/[0.02] transition-all group"
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10">
-                  <Upload className="text-blue-500 w-10 h-10" />
-                </div>
-                <h3 className="text-lg font-medium">Select a PDF file</h3>
-                <p className="text-white/20 text-xs mt-2 uppercase tracking-widest font-bold">Client-side processing</p>
-              </div>
-            ) : (
-              <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                <SortableContext items={pages.map(p => p.id)} strategy={rectSortingStrategy}>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
-                    {pages.map((page) => (
-                      <SortablePage key={page.id} page={page} onRemove={removePage} />
-                    ))}
+            <div className="flex-1 p-8">
+              {!file ? (
+                <div 
+                  className="h-full border-2 border-dashed border-white/5 rounded-[32px] flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/30 hover:bg-blue-500/[0.02] transition-all group duration-500"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <div className="w-24 h-24 bg-blue-500/5 rounded-[32px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-blue-500/10 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
+                    <Upload className="text-blue-500 w-10 h-10" />
                   </div>
-                </SortableContext>
-              </DndContext>
-            )}
-          </div>
-
-          {error && (
-            <div className="m-8 p-4 bg-red-500/10 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-400 text-xs animate-in slide-in-from-bottom-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" /> {error}
+                  <h3 className="text-2xl font-black italic uppercase">Initialize PDF</h3>
+                  <p className="text-white/20 text-[10px] mt-2 uppercase tracking-widest font-black">Secure Local Intake Only</p>
+                </div>
+              ) : (
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                  <SortableContext items={pages.map(p => p.id)} strategy={rectSortingStrategy}>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8">
+                      {pages.map((page) => (
+                        <SortablePage key={page.id} page={page} onRemove={removePage} />
+                      ))}
+                    </div>
+                  </SortableContext>
+                </DndContext>
+              )}
             </div>
-          )}
-        </section>
+
+            {error && (
+              <div className="m-8 p-4 bg-red-500/5 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-400 text-[10px] font-black uppercase tracking-widest animate-in slide-in-from-bottom-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" /> {error}
+              </div>
+            )}
+          </section>
+        </div>
       </main>
 
       <input ref={fileInputRef} type="file" accept=".pdf" className="hidden" onChange={handleFileSelect} />
       
-      <footer className="mt-20 mb-10 relative z-10">
-        <a href="https://www.instagram.com/shivam05_10" target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/30 hover:text-white/60 px-5 py-2.5 bg-white/5 backdrop-blur-md rounded-full border border-white/5 transition-all">
-          Coded by ShivamYadav
-        </a>
+      <footer className="mt-20 py-10 flex flex-col items-center gap-4 opacity-30 border-t border-white/5">
+         <p className="text-[9px] font-black uppercase tracking-[5px]">NexTools Workshop Ecosystem</p>
+         <div className="flex items-center gap-4">
+            <span className="h-[1px] w-8 bg-blue-600/50" />
+            <a href="https://instagram.com/shivam05_10" className="text-[10px] hover:text-blue-400 transition-colors"> शिवम यादव </a>
+            <span className="h-[1px] w-8 bg-blue-600/50" />
+         </div>
       </footer>
     </div>
   );
