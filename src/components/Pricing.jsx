@@ -6,10 +6,7 @@ const Pricing = () => {
   const plans = [
     {
       name: "Free",
-      price: {
-        monthly: 0,
-        yearly: 0
-      },
+      price: { monthly: 0, yearly: 0 },
       description: "Perfect for trying out our services",
       featured: true,
       badge: "Most Popular",
@@ -26,14 +23,11 @@ const Pricing = () => {
         { text: "Priority support", included: false }
       ],
       buttonText: "Get Started Free",
-      buttonStyle: "bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-800"
+      buttonStyle: "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/20"
     },
     {
       name: "Pro",
-      price: {
-        monthly: 499,
-        yearly: 4990
-      },
+      price: { monthly: 499, yearly: 4990 },
       description: "For professionals and power users",
       featured: false,
       badge: null,
@@ -50,15 +44,12 @@ const Pricing = () => {
         { text: "Dedicated support", included: false }
       ],
       buttonText: "Coming Soon",
-      buttonStyle: "bg-white/10 hover:bg-white/15 text-white border border-white/20",
+      buttonStyle: "bg-white/5 hover:bg-white/10 text-white/50 border border-white/10",
       comingSoon: true
     },
     {
       name: "Enterprise",
-      price: {
-        monthly: null,
-        yearly: null
-      },
+      price: { monthly: null, yearly: null },
       description: "Custom solutions for your business",
       featured: false,
       badge: null,
@@ -75,7 +66,7 @@ const Pricing = () => {
         { text: "Dedicated account manager", included: true }
       ],
       buttonText: "Coming Soon",
-      buttonStyle: "bg-white/10 hover:bg-white/15 text-white border border-white/20",
+      buttonStyle: "bg-white/5 hover:bg-white/10 text-white/50 border border-white/10",
       comingSoon: true
     }
   ]
@@ -84,10 +75,8 @@ const Pricing = () => {
     <>
       <style>
         {`
-          @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-          * {
-            font-family: "Poppins", sans-serif;
-          }
+          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+          * { font-family: "Poppins", sans-serif; }
           
           .pricing-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -102,169 +91,124 @@ const Pricing = () => {
             z-index: 10;
           }
           
-          .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-8px);
-          }
-          
           @keyframes pulse-border {
-            0%, 100% {
-              box-shadow: 0 0 0 0 rgba(166, 255, 93, 0.4);
-            }
-            50% {
-              box-shadow: 0 0 0 8px rgba(166, 255, 93, 0);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3); }
+            50% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
           }
           
           .featured-border {
-            animation: pulse-border 2s infinite;
+            animation: pulse-border 3s infinite;
           }
         `}
       </style>
 
-      <section id='pricing' className='bg-black text-white py-20 md:py-28 px-4 bg-[url("https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png")] bg-cover bg-center bg-no-repeat'>
-        <div className='max-w-7xl mx-auto'>
+      <section id='pricing' className='bg-[#0a0a0c] text-white py-20 md:py-28 px-4 relative overflow-hidden'>
+        {/* Decorative Background Blur */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -mr-64 -mt-64" />
+        
+        <div className='max-w-7xl mx-auto relative z-10'>
           {/* Section Header */}
           <div className='text-center mb-16'>
-            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur px-4 py-2 rounded-full mb-6">
-              <div className="relative flex size-2 items-center justify-center">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75 animate-ping"></span>
-                <span className="relative inline-flex size-1.5 rounded-full bg-[#A6FF5D]"></span>
-              </div>
-              <span className='text-xs text-white/70'>Pricing Plans</span>
+            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              </span>
+              <span className='text-[10px] uppercase tracking-widest font-bold text-white/50'>Pricing Plans</span>
             </div>
             
-            <h2 className='text-3xl md:text-5xl font-semibold mb-4 leading-tight'>
-              Choose the perfect plan for you
+            <h2 className='text-4xl md:text-5xl font-bold mb-6 tracking-tight'>
+              Choose the perfect <span className="text-blue-500">plan</span>
             </h2>
-            <p className='text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8'>
-              Start for free and upgrade as you grow. No credit card required for free plan.
+            <p className='text-gray-400 text-lg max-w-2xl mx-auto mb-10'>
+              Start for free and upgrade as you grow. No credit card required.
             </p>
 
             {/* Billing Toggle */}
-            <div className='inline-flex items-center gap-3 bg-gray-900/60 backdrop-blur-sm border border-white/10 rounded-full p-1'>
+            <div className='inline-flex items-center gap-2 bg-white/[0.03] border border-white/10 rounded-2xl p-1.5'>
               <button
                 onClick={() => setBillingCycle('monthly')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  billingCycle === 'monthly'
-                    ? 'bg-[#A6FF5D] text-gray-800'
-                    : 'text-gray-400 hover:text-white'
+                className={`px-8 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                  billingCycle === 'monthly' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/40 hover:text-white'
                 }`}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setBillingCycle('yearly')}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  billingCycle === 'yearly'
-                    ? 'bg-[#A6FF5D] text-gray-800'
-                    : 'text-gray-400 hover:text-white'
+                className={`px-8 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ${
+                  billingCycle === 'yearly' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/40 hover:text-white'
                 }`}
               >
                 Yearly
-                <span className='ml-2 text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full'>
-                  Save 17%
-                </span>
+                <span className='ml-2 text-[10px] bg-white/20 text-white px-2 py-0.5 rounded-md'>-17%</span>
               </button>
             </div>
           </div>
 
           {/* Pricing Cards */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto pt-8'>
             {plans.map((plan, index) => (
               <div
                 key={index}
-                className={`pricing-card relative bg-gray-900/40 backdrop-blur-sm border rounded-2xl p-8 ${
+                className={`pricing-card relative bg-white/[0.02] border rounded-[32px] p-8 md:p-10 ${
                   plan.featured
-                    ? 'featured border-[#A6FF5D]/50 bg-gray-900/60 featured-border'
-                    : 'border-white/10 hover:border-white/20'
+                    ? 'featured border-blue-500/50 bg-white/[0.04] featured-border'
+                    : 'border-white/5 hover:border-white/10'
                 }`}
               >
                 {/* Badge */}
                 {plan.badge && (
-                  <div className='absolute -top-4 left-1/2 -translate-x-1/2'>
-                    <div className='bg-[#A6FF5D] text-gray-800 px-4 py-1 rounded-full text-xs font-semibold'>
-                      {plan.badge}
-                    </div>
+                  <div className='absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl'>
+                    {plan.badge}
                   </div>
                 )}
 
-                {/* Coming Soon Badge */}
                 {plan.comingSoon && (
-                  <div className='absolute -top-4 left-1/2 -translate-x-1/2'>
-                    <div className='bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-xs font-semibold'>
-                      Coming Soon
-                    </div>
+                  <div className='absolute -top-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white/50 px-5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/10'>
+                    Coming Soon
                   </div>
                 )}
 
-                {/* Plan Name */}
                 <h3 className='text-2xl font-bold mb-2'>{plan.name}</h3>
-                <p className='text-gray-400 text-sm mb-6'>{plan.description}</p>
+                <p className='text-white/30 text-sm mb-8 font-medium'>{plan.description}</p>
 
                 {/* Price */}
-                <div className='mb-8'>
+                <div className='mb-10'>
                   {plan.price[billingCycle] !== null ? (
-                    <div className='flex items-baseline gap-1'>
-                      <span className='text-lg text-gray-400'>₹</span>
-                      <span className='text-5xl font-bold'>
-                        {plan.price[billingCycle].toLocaleString('en-IN')}
+                    <div className='flex items-baseline'>
+                      <span className='text-5xl font-black tracking-tighter'>
+                        ₹{plan.price[billingCycle].toLocaleString('en-IN')}
                       </span>
-                      <span className='text-gray-400 ml-2'>
-                        /{billingCycle === 'monthly' ? 'month' : 'year'}
+                      <span className='text-white/20 ml-2 font-bold text-sm uppercase tracking-widest'>
+                        /{billingCycle === 'monthly' ? 'mo' : 'yr'}
                       </span>
                     </div>
                   ) : (
-                    <div className='flex items-baseline gap-1'>
-                      <span className='text-4xl font-bold'>Custom</span>
-                    </div>
+                    <span className='text-4xl font-black tracking-tighter'>Custom</span>
                   )}
                 </div>
 
-                {/* CTA Button */}
                 <button 
-                  className={`w-full py-3 rounded-full text-sm font-medium transition-all duration-300 mb-8 ${plan.buttonStyle} ${
-                    plan.comingSoon ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'
+                  className={`w-full py-4 rounded-2xl text-sm font-black uppercase tracking-widest transition-all duration-300 mb-10 ${plan.buttonStyle} ${
+                    plan.comingSoon ? 'cursor-not-allowed' : 'cursor-pointer active:scale-95'
                   }`}
                   disabled={plan.comingSoon}
                 >
                   {plan.buttonText}
                 </button>
 
-                {/* Features List */}
+                {/* Features */}
                 <div className='space-y-4'>
-                  <p className='text-sm font-semibold text-gray-300 mb-4'>What's included:</p>
+                  <p className='text-[10px] font-black uppercase tracking-[2px] text-white/20 mb-6'>Features Included</p>
                   {plan.features.map((feature, idx) => (
-                    <div key={idx} className='flex items-start gap-3'>
-                      {feature.included ? (
-                        <svg 
-                          className='w-5 h-5 text-[#A6FF5D] flex-shrink-0 mt-0.5' 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M5 13l4 4L19 7" 
-                          />
+                    <div key={idx} className='flex items-center gap-3'>
+                      <div className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center ${feature.included ? 'bg-blue-500/20' : 'bg-white/5'}`}>
+                        <svg className={`w-3 h-3 ${feature.included ? 'text-blue-500' : 'text-white/10'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d={feature.included ? "M5 13l4 4L19 7" : "M6 18L18 6M6 6l12 12"} />
                         </svg>
-                      ) : (
-                        <svg 
-                          className='w-5 h-5 text-gray-600 flex-shrink-0 mt-0.5' 
-                          fill="none" 
-                          viewBox="0 0 24 24" 
-                          stroke="currentColor"
-                        >
-                          <path 
-                            strokeLinecap="round" 
-                            strokeLinejoin="round" 
-                            strokeWidth={2} 
-                            d="M6 18L18 6M6 6l12 12" 
-                          />
-                        </svg>
-                      )}
-                      <span className={`text-sm ${feature.included ? 'text-gray-300' : 'text-gray-600'}`}>
+                      </div>
+                      <span className={`text-sm font-medium ${feature.included ? 'text-white/70' : 'text-white/20 line-through'}`}>
                         {feature.text}
                       </span>
                     </div>
@@ -275,10 +219,9 @@ const Pricing = () => {
           </div>
 
           {/* Bottom Note */}
-          <div className='mt-16 text-center'>
-            <p className='text-gray-400 text-sm'>
-              All plans include a 30-day money-back guarantee. Need a custom solution?{' '}
-              <a href="#" className='text-[#A6FF5D] hover:underline'>Contact us</a>
+          <div className='mt-20 text-center opacity-40 hover:opacity-100 transition-opacity'>
+            <p className='text-sm font-medium'>
+              All plans include a 30-day money-back guarantee. <a href="#contact" className='text-blue-500 hover:underline underline-offset-4'>Contact us</a> for custom needs.
             </p>
           </div>
         </div>

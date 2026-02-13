@@ -2,156 +2,133 @@ import React, { useState } from "react";
 
 const Hero = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <>
       <style>
         {`
-                    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-                    *{
-                        font-family: "Poppins", sans-serif;
-                    }
-                    @keyframes rotate {
-                        100% {
-                            transform: rotate(1turn);
-                        }
-                    }
-            
-                    .rainbow::before {
-                        content: '';
-                        position: absolute;
-                        z-index: -2;
-                        left: -50%;
-                        top: -50%;
-                        width: 200%;
-                        height: 200%;
-                        background-position: 100% 50%;
-                        background-repeat: no-repeat;
-                        background-size: 50% 30%;
-                        filter: blur(6px);
-                        background-image: linear-gradient(#FFF);
-                        animation: rotate 4s linear infinite;
-                    }
-                `}
+          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+          * { font-family: "Poppins", sans-serif; }
+
+          @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+
+          /* The Glowing Border Effect */
+          .rainbow {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+            padding: 1.5px; /* Border thickness */
+          }
+
+          .rainbow::before {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            left: -50%;
+            top: -50%;
+            width: 200%;
+            height: 200%;
+            background-color: #1a1a1a;
+            background-repeat: no-repeat;
+            background-size: 50% 50%, 50% 50%;
+            background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+            background-image: conic-gradient(transparent, #2563eb, #4f46e5, transparent 30%);
+            animation: rotate 4s linear infinite;
+          }
+
+          .rainbow::after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            left: 1px;
+            top: 1px;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            background: #0d0d12;
+            border-radius: 9999px;
+          }
+        `}
       </style>
 
-      <header id="home" className='bg-black text-white flex flex-col items-center bg-[url("https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png")] bg-cover bg-center bg-no-repeat pb-10'>
-       <nav className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-  <div className="max-w-7xl mx-auto flex items-center justify-between h-16 px-6 md:px-12 lg:px-20">
-
-    {/* Logo */}
-    <h2 className="text-2xl font-semibold">
-      Nex<span className="text-[#A6FF5D]">Tools</span>
-    </h2>
-
-    {/* Desktop Menu */}
-    <div className="hidden md:flex items-center gap-8 text-sm">
-      <a href="#home"className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        Home
-      </a>
-      <a href="#services"className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        Services
-      </a>
-      <a href="#faq"className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        FAQ
-      </a>
-      <a href="#pricing"className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        Pricing
-      </a>
-      <a href="#contact"className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        Contact
-      </a>
-    <a href="#footer" className="relative text-white/70 hover:text-[#A6FF5D] transition duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-[#A6FF5D] after:transition-all after:duration-300 hover:after:w-full"
->
-        Footer
-      </a>
-    </div>
-
-    {/* Mobile Menu Button */}
-    <button
-      onClick={() => setMobileOpen(true)}
-      className="md:hidden bg-gray-900 hover:bg-gray-800 text-white p-2 rounded-md transition"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M4 6h16" />
-        <path d="M4 12h16" />
-        <path d="M4 18h16" />
-      </svg>
-    </button>
-  </div>
-</nav>
-
-
-        <div className="rainbow relative z-0 bg-white/15 overflow-hidden p-px flex items-center justify-center rounded-full transition duration-300 active:scale-100 mt-28 md:mt-32">
-          <button className="flex items-center justify-center gap-3 pl-4 pr-6 py-3 text-white rounded-full font-medium bg-gray-900/80 backdrop-blur">
-            <div className="relative flex size-3.5 items-center justify-center">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-[#A6FF5D] opacity-75 animate-ping duration-300"></span>
-              <span className="relative inline-flex size-2 rounded-full bg-[#A6FF5D]"></span>
+      <header id="home" className="bg-[#0a0a0c] text-white flex flex-col items-center relative overflow-hidden pb-24">
+        
+        {/* Ambient Glows for Depth */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -mr-48 -mt-48 pointer-events-none" />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-indigo-600/5 blur-[100px] rounded-full -ml-48 pointer-events-none" />
+        
+        {/* Navbar */}
+        <nav className="fixed top-0 left-0 w-full z-50 bg-[#0a0a0c]/80 backdrop-blur-xl border-b border-white/5">
+          <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-6 md:px-12">
+            
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <img src="/NexTools.png" alt="Logo" className="w-8 h-8 object-contain" />
+              <h2 className="text-2xl font-bold tracking-tighter">
+                Nex<span className="text-blue-500">Tools</span>
+              </h2>
             </div>
-            <span className="text-xs">Powerful Tools. Zero Hassle.</span>
-          </button>
-        </div>
 
-        <h1 className="text-4xl md:text-[64px]/[82px] text-center max-w-4xl mt-5 bg-clip-text leading-tight px-4">
-          Powerful tools
-that simplify your workflow
-        </h1>
-        <p className="text-sm md:text-base text-gray-300 bg-clip-text text-center max-w-lg mt-4.5 px-4">
-A fast and privacy-focused platform offering PDF utilities, QR generation and file tools — all in one place.
-        </p>
-
-        <div className="flex gap-3 mt-8">
-          <button className="bg-[#A6FF5D] hover:bg-[#A6FF5D]/90 text-gray-800 px-6 py-2.5 rounded-full text-sm transition cursor-pointer group">
-            <div className="relative overflow-hidden">
-              <span className="block transition-transform duration-200 group-hover:-translate-y-full">
-                Get Started today
-              </span>
-              <span className="absolute top-0 left-0 block transition-transform duration-200 group-hover:translate-y-0 translate-y-full">
-                Get Started today
-              </span>
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-10 text-[11px] font-black uppercase tracking-[2px]">
+              {['home', 'services', 'faq', 'pricing', 'contact'].map((item) => (
+                <a 
+                  key={item}
+                  href={`#${item}`} 
+                  className="text-white/30 hover:text-blue-500 transition-colors duration-300"
+                >
+                  {item}
+                </a>
+              ))}
             </div>
-          </button>
-          <div className="bg-white/15 hover:bg-white/10 p-px flex items-center justify-center rounded-full hover:scale-105 transition duration-300 active:scale-100">
-            <button id="services" className="px-6 text-sm py-3 text-white rounded-full bg-white/5 cursor-pointer">
-              Our products
+
+            {/* Mobile Menu Button */}
+            <button onClick={() => setMobileOpen(true)} className="md:hidden text-white/50 hover:text-white transition">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
             </button>
           </div>
+        </nav>
+
+        {/* Floating Badge */}
+        <div className="rainbow flex items-center justify-center rounded-full mt-40 md:mt-48 transition active:scale-95 shadow-2xl shadow-blue-500/10 relative z-10">
+          <button className="flex items-center justify-center gap-3 px-6 py-2.5 text-white rounded-full font-medium bg-[#0d0d12] backdrop-blur relative z-10">
+            <div className="relative flex size-2 items-center justify-center">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75 animate-ping"></span>
+              <span className="relative inline-flex size-1.5 rounded-full bg-blue-500"></span>
+            </div>
+            <span className="text-[10px] uppercase tracking-[2px] font-bold text-white/80">Powerful Tools • Zero Hassle</span>
+          </button>
         </div>
 
+        {/* Hero Title */}
+        <h1 className="text-5xl md:text-[80px] font-bold text-center max-w-5xl mt-10 leading-[1] px-4 tracking-tighter relative z-10">
+          Tools that simplify your <br className="hidden md:block" />
+          <span className="text-blue-500">digital workflow.</span>
+        </h1>
         
+        <p className="text-base md:text-xl text-white/30 text-center max-w-2xl mt-8 px-4 font-medium leading-relaxed relative z-10">
+          A lightning-fast, privacy-first platform offering PDF utilities, QR generation, and image tools—all processed directly in your browser.
+        </p>
 
-        <div className="scroll-down flex flex-col items-center gap-4 mt-20 animate-bounce cursor-pointer">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19 9A7 7 0 1 0 5 9v6a7 7 0 1 0 14 0zm-7-3v4"
-              stroke="#fff"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <p className="text-sm text-white/50">Scroll down</p>
+        {/* Buttons */}
+        <div className="flex flex-col md:flex-row gap-5 mt-14 relative z-10">
+          <button className="bg-blue-600 hover:bg-blue-500 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 active:scale-95">
+            Get Started Today
+          </button>
+          
+          <button className="px-12 py-5 text-sm font-black uppercase tracking-widest text-white/70 rounded-2xl border border-white/10 hover:bg-white/5 transition-all">
+            Our Products
+          </button>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="flex flex-col items-center gap-4 mt-28 opacity-20 hover:opacity-100 transition-opacity cursor-pointer animate-bounce relative z-10">
+          <div className="w-[2px] h-12 bg-gradient-to-b from-blue-500 to-transparent rounded-full" />
+          <p className="text-[10px] font-black uppercase tracking-[4px]">Scroll</p>
+        </div>
+
       </header>
     </>
   );
