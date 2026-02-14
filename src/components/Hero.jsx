@@ -16,7 +16,6 @@ const Hero = () => {
             to { transform: rotate(360deg); }
           }
 
-          /* The Glowing Border Effect */
           .rainbow {
             position: relative;
             z-index: 0;
@@ -52,7 +51,6 @@ const Hero = () => {
             border-radius: 9999px;
           }
 
-          /* Mobile Menu Styles */
           .mobile-menu {
             position: fixed;
             top: 0;
@@ -66,9 +64,7 @@ const Hero = () => {
             border-left: 1px solid rgba(255,255,255,0.05);
           }
 
-          .mobile-menu.open {
-            right: 0;
-          }
+          .mobile-menu.open { right: 0; }
 
           .mobile-overlay {
             position: fixed;
@@ -90,42 +86,24 @@ const Hero = () => {
         `}
       </style>
 
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`mobile-overlay ${mobileOpen ? 'open' : ''}`}
-        onClick={() => setMobileOpen(false)}
-      />
+      <div className={`mobile-overlay ${mobileOpen ? 'open' : ''}`} onClick={() => setMobileOpen(false)} />
 
-      {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileOpen ? 'open' : ''}`}>
         <div className="flex flex-col h-full">
-          {/* Mobile Menu Header */}
           <div className="flex items-center justify-between p-6 border-b border-white/5">
             <div className="flex items-center gap-3">
               <img src="/NexTools.png" alt="Logo" className="w-8 h-8 object-contain" />
-              <h2 className="text-2xl font-bold tracking-tighter">
-                Nex<span className="text-blue-500">Tools</span>
-              </h2>
+              <h2 className="text-2xl font-bold tracking-tighter">Nex<span className="text-blue-500">Tools</span></h2>
             </div>
-            <button 
-              onClick={() => setMobileOpen(false)}
-              className="text-white/50 hover:text-white transition"
-            >
+            <button onClick={() => setMobileOpen(false)} className="text-white/50 hover:text-white transition">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
           </div>
-
-          {/* Mobile Menu Links */}
           <div className="flex flex-col gap-2 p-6">
             {['home', 'about', 'services', 'faq', 'pricing', 'contact', 'footer'].map((item) => (
-              <a
-                key={item}
-                href={`#${item}`}
-                onClick={() => setMobileOpen(false)}
-                className="text-white/60 hover:text-blue-500 transition-colors duration-300 py-4 text-lg font-semibold uppercase tracking-wider border-b border-white/5"
-              >
+              <a key={item} href={`#${item}`} onClick={() => setMobileOpen(false)} className="text-white/60 hover:text-blue-500 transition-colors py-4 text-lg font-semibold uppercase tracking-wider border-b border-white/5">
                 {item}
               </a>
             ))}
@@ -134,41 +112,21 @@ const Hero = () => {
       </div>
 
       <header id="home" className="bg-[#0a0a0c] text-white flex flex-col items-center relative overflow-hidden pb-24">
-        
-        {/* Ambient Glows for Depth */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -mr-48 -mt-48 pointer-events-none" />
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-indigo-600/5 blur-[100px] rounded-full -ml-48 pointer-events-none" />
         
-        {/* Navbar */}
         <nav className="fixed top-0 left-0 w-full z-50 bg-[#0a0a0c]/80 backdrop-blur-xl border-b border-white/5">
           <div className="max-w-7xl mx-auto flex items-center justify-between h-20 px-6 md:px-12">
-            
-            {/* Logo */}
             <div className="flex items-center gap-3">
               <img src="/NexTools.png" alt="Logo" className="w-8 h-8 object-contain" />
-              <h2 className="text-2xl font-bold tracking-tighter">
-                Nex<span className="text-blue-500">Tools</span>
-              </h2>
+              <h2 className="text-2xl font-bold tracking-tighter">Nex<span className="text-blue-500">Tools</span></h2>
             </div>
-
-            {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-10 text-[11px] font-black uppercase tracking-[2px]">
               {['home', 'about', 'services', 'faq', 'pricing', 'contact', 'footer'].map((item) => (
-                <a 
-                  key={item}
-                  href={`#${item}`} 
-                  className="text-white/30 hover:text-blue-500 transition-colors duration-300"
-                >
-                  {item}
-                </a>
+                <a key={item} href={`#${item}`} className="text-white/30 hover:text-blue-500 transition-colors duration-300">{item}</a>
               ))}
             </div>
-
-            {/* Mobile Menu Button */}
-            <button 
-              onClick={() => setMobileOpen(true)} 
-              className="md:hidden text-white/50 hover:text-white transition"
-            >
+            <button onClick={() => setMobileOpen(true)} className="md:hidden text-white/50 hover:text-white transition">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -176,7 +134,6 @@ const Hero = () => {
           </div>
         </nav>
 
-        {/* Floating Badge */}
         <div className="rainbow flex items-center justify-center rounded-full mt-40 md:mt-48 transition active:scale-95 shadow-2xl shadow-blue-500/10 relative z-10">
           <button className="flex items-center justify-center gap-3 px-6 py-2.5 text-white rounded-full font-medium bg-[#0d0d12] backdrop-blur relative z-10">
             <div className="relative flex size-2 items-center justify-center">
@@ -187,25 +144,21 @@ const Hero = () => {
           </button>
         </div>
 
-        {/* Hero Title */}
         <h1 className="text-5xl md:text-[85px] font-black text-center max-w-6xl mt-10 leading-[0.9] px-4 tracking-tighter relative z-10 italic uppercase">
           The Ultimate <br className="hidden md:block" />
           <span className="text-white/10">Digital Workshop.</span>
         </h1>
 
         <p className="text-base md:text-xl text-white/40 text-center max-w-3xl mt-8 px-6 font-medium leading-relaxed relative z-10">
-          Professional-grade tools for creators and developers. From <span className="text-white/80">PDF encryption</span> to <span className="text-white/80">AI image processing</span>, 
-          everything happens locally in your browser—your data never leaves your device.
+          Professional-grade tools for creators and developers. Everything happens locally in your browser—your data never leaves your device.
         </p>
 
-        {/* Buttons */}
         <div className="flex flex-col md:flex-row gap-5 mt-14 relative z-10">
           <Link to="/services">
             <button className="bg-blue-600 hover:bg-blue-500 text-white px-12 py-5 rounded-2xl text-sm font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-600/20 active:scale-95">
               Get Started Today
             </button>
           </Link>
-          
           <Link to="/services">
             <button className="px-12 py-5 text-sm font-black uppercase tracking-widest text-white/70 rounded-2xl border border-white/10 hover:bg-white/5 transition-all">
               Our Tools
@@ -213,8 +166,66 @@ const Hero = () => {
           </Link>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="flex flex-col items-center gap-4 mt-28 opacity-20 hover:opacity-100 transition-opacity cursor-pointer animate-bounce relative z-10">
+       
+       {/* --- TRIPLE GIF WORKSHOP DISPLAY --- */}
+<div className="mt-28 px-6 relative z-10 w-full max-w-7xl">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    {/* Module 1: F (Organizer) */}
+    <div className="relative group">
+      <div className="absolute -inset-0.5 bg-blue-600 rounded-[24px] blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+      <div className="relative bg-[#0d0d12] border border-white/5 rounded-[24px] overflow-hidden shadow-2xl">
+        <div className="flex justify-between items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+          <span className="text-[12px] font-black uppercase tracking-[2px] text-white">PDF-Organizer.vfx</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[7px] font-bold text-blue-500/50 uppercase tracking-widest animate-pulse">Active</span>
+            <div className="size-1.5 rounded-full bg-blue-500/50"></div>
+          </div>
+        </div>
+        <div className="aspect-[4/3] overflow-hidden bg-black/40">
+          <img src="/Organizer.gif" alt="Text to PDF" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
+        </div>
+      </div>
+    </div>
+
+    {/* Module 2: Background Remover (AI Tool) */}
+    <div className="relative group">
+      <div className="absolute -inset-0.5 bg-indigo-600 rounded-[24px] blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+      <div className="relative bg-[#0d0d12] border border-white/5 rounded-[24px] overflow-hidden shadow-2xl">
+        <div className="flex justify-between items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+          <span className="text-[12px] font-black uppercase tracking-[2px] text-white">Color-Extractor.vfx</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[7px] font-bold text-indigo-500/50 uppercase tracking-widest animate-pulse">Processing</span>
+            <div className="size-1.5 rounded-full bg-indigo-500/50"></div>
+          </div>
+        </div>
+        <div className="aspect-[4/3] overflow-hidden bg-black/40">
+          <img src="/Color.gif" alt="Background Remover" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
+        </div>
+      </div>
+    </div>
+
+    {/* Module 3: Password  (Creative Tool) */}
+    <div className="relative group">
+      <div className="absolute -inset-0.5 bg-purple-600 rounded-[24px] blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+      <div className="relative bg-[#0d0d12] border border-white/5 rounded-[24px] overflow-hidden shadow-2xl">
+        <div className="flex justify-between items-center px-4 py-3 border-b border-white/5 bg-white/[0.02]">
+          <span className="text-[12px] font-black uppercase tracking-[2px] text-white">PDF-Protector.VFX</span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[7px] font-bold text-purple-500/50 uppercase tracking-widest animate-pulse">Rendering</span>
+            <div className="size-1.5 rounded-full bg-purple-500/50"></div>
+          </div>
+        </div>
+        <div className="aspect-[4/3] overflow-hidden bg-black/40">
+          <img src="/Password.gif" alt="Code to Image" className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-500" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+        <div className="flex flex-col items-center gap-4 mt-20 opacity-20 hover:opacity-100 transition-opacity cursor-pointer animate-bounce relative z-10">
           <div className="w-[2px] h-12 bg-gradient-to-b from-blue-500 to-transparent rounded-full" />
           <p className="text-[10px] font-black uppercase tracking-[4px]">Scroll</p>
         </div>

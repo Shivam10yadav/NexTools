@@ -24,6 +24,7 @@ import ColorPalette from "./pages/ColorPalette";
 import CodeToImage from "./pages/CodeToImage";
 import PDFProtect from "./pages/PDFProtect";
 import NotFound from "./pages/NotFound";
+import HiddenMessage from "./pages/HiddenMessage";
 
 // --- Layout Wrapper ---
 const LayoutWrapper = ({ children }) => {
@@ -71,6 +72,7 @@ function AnimatedRoutes() {
         <Route path="/services/colorpalette" element={<PageTransition><ColorPalette /></PageTransition>} />
         <Route path="/services/codetoimage" element={<PageTransition><CodeToImage /></PageTransition>} />
         <Route path="/services/pdfprotect" element={<PageTransition><PDFProtect /></PageTransition>} />
+        <Route path="/services/hiddenmessage" element={<PageTransition><HiddenMessage /></PageTransition>} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

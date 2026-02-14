@@ -52,7 +52,7 @@ const PDFProtect = () => {
       <main className="max-w-5xl mx-auto relative z-10">
         <header className="mb-16">
           <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/30 hover:text-white mb-8 transition group">
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform"/> Back to Tools
+            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform"/> Back
           </button>
           <h1 className="text-5xl font-black tracking-tighter ">PDF <span className="text-blue-500">VAULT</span></h1>
           <p className="text-white/40 mt-3 text-lg">Secure your documents with zero-server encryption.</p>

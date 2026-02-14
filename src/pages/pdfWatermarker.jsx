@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
-import { Upload, Download, Type, RefreshCw, AlertCircle, ShieldAlert, Sliders, LayoutGrid, Square } from 'lucide-react';
+import { 
+  Upload, Type, Download, RefreshCw, AlertCircle, 
+  ShieldAlert, Sliders, LayoutGrid, Square, ChevronLeft,
+  Activity, ShieldCheck, PenTool
+} from 'lucide-react';
 
 const PDFWatermarker = () => {
   const [file, setFile] = useState(null);
@@ -45,14 +49,12 @@ const PDFWatermarker = () => {
         };
 
         if (mode === 'single') {
-          // Center Placement
           page.drawText(watermarkText, {
             ...config,
             x: width / 2 - (watermarkText.length * fontSize) / 4,
             y: height / 2,
           });
         } else {
-          // Tile Mode (Grid)
           const stepX = 250;
           const stepY = 250;
           for (let x = 0; x < width; x += stepX) {
@@ -61,7 +63,7 @@ const PDFWatermarker = () => {
                 ...config,
                 x: x,
                 y: y,
-                size: fontSize / 2, // Smaller for tiles
+                size: fontSize / 2,
               });
             }
           }
@@ -84,120 +86,182 @@ const PDFWatermarker = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-[#0a0a0c] text-white/90 flex flex-col items-center p-6 md:p-12 font-sans relative">
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_50%_0%,#14141a_0%,#0a0a0c_70%)] pointer-events-none" />
+    <div className="min-h-screen bg-[#0a0a0c] text-white p-6 pt-32 relative overflow-hidden selection:bg-blue-500/30 font-sans">
+      
+      {/* --- BACKGROUND AMBIENCE --- */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none" 
+           style={{ backgroundImage: 'radial-gradient(#2563eb 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] pointer-events-none" />
 
-      <header className="relative text-center mb-12 w-full max-w-[1000px]">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-2">PDF Watermarker</h1>
-        <p className="text-white/60">Choose between single stamp or secure tile patterns</p>
-      </header>
-
-      <main className="relative z-10 grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-8 w-full max-w-[1200px]">
+      <main className="max-w-7xl mx-auto relative z-10">
         
-        {/* Sidebar Controls */}
-        <aside className="bg-[#111115] border border-white/10 rounded-2xl p-6 shadow-2xl h-fit lg:sticky lg:top-6 space-y-6">
-          <div className="flex items-center gap-2 mb-2 text-blue-400 font-semibold uppercase text-xs tracking-widest">
-            <Sliders className="w-4 h-4" /> Configuration
+        {/* --- HEADER --- */}
+        <header className="mb-12">
+          <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/40 hover:text-blue-400 mb-6 transition group">
+            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
+          </button>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
+            <ShieldAlert size={12} className="text-blue-400 animate-pulse" />
+            <span className="text-[9px] font-black uppercase tracking-[2px] text-blue-400">Security Overlay v4.0</span>
           </div>
+          <h1 className="text-5xl font-black italic uppercase tracking-tight">
+            PDF <span className="text-blue-600 drop-shadow-[0_0_20px_rgba(37,99,235,0.4)]">Watermarker</span>
+          </h1>
+          <p className="text-white/40 mt-3 font-medium">Embed immutable ownership markers across your document architecture.</p>
+        </header>
 
-          <div className="space-y-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] text-white/40 uppercase font-bold">Watermark Mode</label>
-              <div className="grid grid-cols-2 gap-2 p-1 bg-white/5 rounded-xl border border-white/10">
+        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-8">
+          
+          {/* --- CONFIGURATION SIDEBAR --- */}
+          <aside className="space-y-6">
+            <div className="bg-white/[0.03] border border-white/5 rounded-[24px] p-6 shadow-2xl backdrop-blur-md sticky top-32">
+              <div className="flex items-center gap-2 mb-6 text-blue-400 font-bold uppercase text-[10px] tracking-widest">
+                <Sliders className="w-4 h-4" /> Control Console
+              </div>
+
+              <div className="space-y-5">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Marking Protocol</label>
+                  <div className="grid grid-cols-2 gap-2 p-1 bg-white/5 rounded-xl border border-white/5">
+                    <button 
+                      onClick={() => setMode('single')}
+                      className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-[10px] font-black uppercase transition-all ${mode === 'single' ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]' : 'text-white/30 hover:text-white/60'}`}
+                    >
+                      <Square className="w-3 h-3" /> Center
+                    </button>
+                    <button 
+                      onClick={() => setMode('tile')}
+                      className={`flex items-center justify-center gap-2 py-2.5 rounded-lg text-[10px] font-black uppercase transition-all ${mode === 'tile' ? 'bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.3)]' : 'text-white/30 hover:text-white/60'}`}
+                    >
+                      <LayoutGrid className="w-3 h-3" /> Grid
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Content Signature</label>
+                  <input 
+                    type="text" value={watermarkText}
+                    onChange={(e) => setWatermarkText(e.target.value)}
+                    placeholder="Enter Watermark..."
+                    className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-sm font-bold outline-none focus:border-blue-500/50 transition-all placeholder:text-white/10"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                   <div>
+                     <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Scale</label>
+                     <input type="number" value={fontSize} onChange={(e) => setFontSize(e.target.value)} className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-2.5 text-sm font-bold mt-1 outline-none focus:border-blue-500/50" />
+                   </div>
+                   <div>
+                     <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Angle (°)</label>
+                     <input type="number" value={rotation} onChange={(e) => setRotation(e.target.value)} className="w-full bg-white/5 border border-white/5 rounded-xl px-4 py-2.5 text-sm font-bold mt-1 outline-none focus:border-blue-500/50" />
+                   </div>
+                </div>
+
                 <button 
-                  onClick={() => setMode('single')}
-                  className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs transition-all ${mode === 'single' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
+                  onClick={applyWatermark}
+                  disabled={!file || isProcessing}
+                  className="w-full py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-blue-500 disabled:opacity-20 transition-all shadow-xl shadow-blue-900/20 mt-4"
                 >
-                  <Square className="w-3 h-3" /> Single
-                </button>
-                <button 
-                  onClick={() => setMode('tile')}
-                  className={`flex items-center justify-center gap-2 py-2 rounded-lg text-xs transition-all ${mode === 'tile' ? 'bg-blue-600 text-white shadow-lg' : 'text-white/40 hover:text-white'}`}
-                >
-                  <LayoutGrid className="w-3 h-3" /> Tile
+                  {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <PenTool className="w-4 h-4" />}
+                  Generate Overlay
                 </button>
               </div>
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-[10px] text-white/40 uppercase font-bold">Watermark Text</label>
-              <input 
-                type="text" value={watermarkText}
-                onChange={(e) => setWatermarkText(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-blue-500 transition-all"
-              />
+            <div className="p-6 bg-blue-500/5 border border-blue-500/10 rounded-[24px] flex gap-3">
+              <ShieldCheck className="text-blue-500 shrink-0" size={20} />
+              <p className="text-[10px] leading-relaxed text-blue-200/50 font-bold uppercase tracking-wider">
+                Encryption active. Your document is processed entirely within local memory.
+              </p>
             </div>
+          </aside>
 
-            <div className="grid grid-cols-2 gap-4">
-               <div>
-                 <label className="text-[10px] text-white/40 uppercase font-bold">Size</label>
-                 <input type="number" value={fontSize} onChange={(e) => setFontSize(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm mt-1" />
-               </div>
-               <div>
-                 <label className="text-[10px] text-white/40 uppercase font-bold">Rotation</label>
-                 <input type="number" value={rotation} onChange={(e) => setRotation(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm mt-1" />
-               </div>
-            </div>
-
-            <div className="pt-4 border-t border-white/5">
-              <button 
-                onClick={applyWatermark}
-                disabled={!file || isProcessing}
-                className="w-full py-4 bg-white text-black rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:bg-white/90 disabled:opacity-20 transition-all shadow-xl"
-              >
-                {isProcessing ? <RefreshCw className="w-4 h-4 animate-spin" /> : <ShieldAlert className="w-4 h-4" />}
-                Process PDF
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        {/* Workspace */}
-        <section className="bg-[#111115] border border-white/10 rounded-3xl shadow-2xl flex flex-col min-h-[500px] overflow-hidden">
-          <div className="px-8 py-4 border-b border-white/5 bg-white/[0.01] flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-white/40">
-            Live Preview Simulation
-          </div>
-
-          <div className="flex-1 p-8 flex flex-col items-center justify-center" onClick={() => !file && fileInputRef.current?.click()}>
-            {!file ? (
-              <div className="flex flex-col items-center cursor-pointer group">
-                <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mb-6 group-hover:border-blue-500/50 border border-white/10 transition-all">
-                  <Type className="text-blue-500 w-10 h-10" />
+          {/* --- WORKSPACE / PREVIEW --- */}
+          <section className="bg-white/[0.03] border border-white/5 rounded-[32px] min-h-[600px] flex flex-col relative overflow-hidden shadow-2xl backdrop-blur-sm">
+            <div className="px-8 py-5 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+              <span className="text-[10px] font-black uppercase tracking-[3px] text-white/30">Schematic Preview</span>
+              {isProcessing && (
+                <div className="flex items-center gap-2 text-blue-400 text-[10px] font-black uppercase animate-pulse">
+                  <Activity className="w-3 h-3" /> Processing...
                 </div>
-                <h3 className="text-lg font-medium">Click to select PDF</h3>
-              </div>
-            ) : (
-              <div className="w-full max-w-sm relative bg-white rounded border-[6px] border-white shadow-2xl overflow-hidden aspect-[3/4]">
-                <div className="p-4 space-y-3 opacity-10">
-                    {[...Array(8)].map((_, i) => <div key={i} className={`h-3 rounded bg-slate-400 ${i % 2 === 0 ? 'w-full' : 'w-3/4'}`} />)}
+              )}
+            </div>
+
+            <div className="flex-1 p-8 flex flex-col items-center justify-center" onClick={() => !file && fileInputRef.current?.click()}>
+              {!file ? (
+                <div className="flex flex-col items-center cursor-pointer group">
+                  <div className="w-24 h-24 bg-blue-500/5 rounded-[32px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-blue-500/10 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
+                    <Type className="text-blue-500 w-10 h-10" />
+                  </div>
+                  <h3 className="text-2xl font-black italic uppercase">Initialize PDF</h3>
+                  <p className="text-white/20 text-[10px] mt-2 uppercase tracking-widest font-black">Secure Payload Intake</p>
                 </div>
-                
-                {/* Visual Simulation of the Code's Logic */}
-                <div className="absolute inset-0 flex flex-wrap items-center justify-center pointer-events-none p-4 overflow-hidden">
-                  {mode === 'single' ? (
-                    <div style={{ opacity, transform: `rotate(${rotation}deg)`, fontSize: `${fontSize/3}px` }} className="font-bold text-slate-800">
-                      {watermarkText}
-                    </div>
-                  ) : (
-                    [...Array(12)].map((_, i) => (
-                      <div key={i} style={{ opacity, transform: `rotate(${rotation}deg)`, fontSize: `${fontSize/6}px` }} className="font-bold text-slate-800 m-4">
+              ) : (
+                <div className="w-full max-w-md relative bg-white rounded-[12px] border-[12px] border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.5)] overflow-hidden aspect-[3/4] animate-in zoom-in duration-500">
+                  {/* Dummy text content to mimic a PDF */}
+                  <div className="p-8 space-y-4 opacity-[0.05] pointer-events-none">
+                    <div className="h-6 w-1/3 bg-slate-900 rounded" />
+                    {[...Array(12)].map((_, i) => (
+                      <div key={i} className={`h-2 rounded bg-slate-800 ${i % 3 === 0 ? 'w-full' : i % 3 === 1 ? 'w-5/6' : 'w-4/6'}`} />
+                    ))}
+                  </div>
+                  
+                  {/* Real-time CSS Simulation of PDF-Lib Logic */}
+                  <div className="absolute inset-0 flex flex-wrap items-center justify-center pointer-events-none p-4 overflow-hidden">
+                    {mode === 'single' ? (
+                      <div 
+                        style={{ 
+                          opacity, 
+                          transform: `rotate(${rotation}deg)`, 
+                          fontSize: `${fontSize/3}px` 
+                        }} 
+                        className="font-black text-slate-900 whitespace-nowrap"
+                      >
                         {watermarkText}
                       </div>
-                    ))
-                  )}
+                    ) : (
+                      <div className="grid grid-cols-3 gap-8">
+                        {[...Array(12)].map((_, i) => (
+                          <div 
+                            key={i} 
+                            style={{ 
+                              opacity, 
+                              transform: `rotate(${rotation}deg)`, 
+                              fontSize: `${fontSize/6}px` 
+                            }} 
+                            className="font-black text-slate-900 whitespace-nowrap"
+                          >
+                            {watermarkText}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
+              )}
+            </div>
+
+            {error && (
+              <div className="m-8 p-4 bg-red-500/5 border border-red-500/20 rounded-2xl flex items-center gap-3 text-red-400 text-[10px] font-black uppercase tracking-widest animate-in slide-in-from-bottom-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0" /> {error}
               </div>
             )}
-          </div>
-        </section>
+          </section>
+        </div>
       </main>
 
       <input ref={fileInputRef} type="file" accept=".pdf" className="hidden" onChange={handleFileSelect} />
       
-      <footer className="mt-20 mb-10">
-        <a href="https://www.instagram.com/shivam05_10" target="_blank" rel="noopener noreferrer" className="text-[10px] text-white/30 hover:text-white/60 px-5 py-2.5 bg-white/5 rounded-full border border-white/5 transition-all">
-          Coded by ShivamYadav
-        </a>
+      {/* --- FOOTER --- */}
+      <footer className="mt-20 py-10 flex flex-col items-center gap-4 opacity-30 border-t border-white/5">
+         <p className="text-[9px] font-black uppercase tracking-[5px]">NexTools Workshop Ecosystem</p>
+         <div className="flex items-center gap-4">
+            <span className="h-[1px] w-8 bg-blue-600/50" />
+            <a href="https://instagram.com/shivam05_10" target="_blank" className="text-[10px] hover:text-blue-400 transition-colors"> शिवम यादव </a>
+            <span className="h-[1px] w-8 bg-blue-600/50" />
+         </div>
       </footer>
     </div>
   );

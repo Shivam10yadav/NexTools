@@ -3,7 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { 
   Home, Layers, Scissors, Hash, Minimize2, 
   ShieldAlert, Edit3, Image as ImageIcon, QrCode, FileText, X, LayoutGrid,
-  FileStack, Wand2, Palette, Code2, Lock, ChevronDown, Video
+  FileStack, Wand2, Palette, Code2, Lock, ChevronDown, Video,
+  EyeOff
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -28,6 +29,7 @@ const Sidebar = () => {
       title: "Image Studio",
       icon: ImageIcon,
       items: [
+         { name: 'Hidden Message.', path: '/services/hiddenmessage', icon: EyeOff },
         { name: 'Image Conv.', path: '/services/imageconverter', icon: ImageIcon },
         { name: 'Background Remover', path: '/services/backgroundremover', icon: Wand2 },
         { name: 'Image To PDF', path: '/services/imagetopdf', icon: FileStack }, 
@@ -81,7 +83,7 @@ const Sidebar = () => {
           {/* Static Home Link */}
           <NavLink to="/" className={({ isActive }) => `flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${isActive ? 'bg-blue-600' : 'hover:bg-white/5 text-white/40'}`}>
             <Home size={20} />
-            <span className="text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100">Dashboard</span>
+            <span className="text-sm font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100">Home</span>
           </NavLink>
 
           <div className="h-px bg-white/5 mx-2" />

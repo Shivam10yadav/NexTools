@@ -50,7 +50,7 @@ const ColorPalette = () => {
       <main className="max-w-6xl mx-auto relative z-10">
         <header className="mb-12">
           <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/40 hover:text-white mb-6 transition group">
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Dashboard
+            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
           </button>
           <h1 className="text-4xl font-bold tracking-tight">Color <span className="text-blue-500">Palette</span></h1>
           <p className="text-white/40 mt-2">Instantly grab dominant HEX codes for your design projects.</p>

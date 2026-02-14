@@ -37,7 +37,7 @@ const CodeToImage = () => {
       <main className="max-w-6xl mx-auto relative z-10">
         <header className="mb-12">
           <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/40 hover:text-white mb-6 transition">
-            <ChevronLeft size={16} /> Dashboard
+            <ChevronLeft size={16} /> Back
           </button>
           <h1 className="text-4xl font-bold tracking-tight">Code <span className="text-blue-500">Snap</span></h1>
           <p className="text-white/40 mt-2">Beautiful code snippets for your social media presence.</p>
