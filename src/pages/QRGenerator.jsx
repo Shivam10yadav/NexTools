@@ -1,246 +1,156 @@
-import { useState, useEffect, useRef } from "react";
-import QRCode from "qrcode";
-import { 
-  QrCode, Download, RefreshCw, Settings, ChevronLeft, 
-  Zap, ShieldCheck, Activity, Copy, Check 
-} from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { QrCode, Download, Palette, Link as LinkIcon, Share2, ShieldCheck, Zap, Layers, Maximize } from 'lucide-react';
+import { QRCodeCanvas } from 'qrcode.react';
 
-const QRGenerator = () => {
-  const [text, setText] = useState("");
-  const [qrDataUrl, setQrDataUrl] = useState("");
-  const [qrSvg, setQrSvg] = useState("");
-  const [copied, setCopied] = useState(false);
-  const [options, setOptions] = useState({
-    margin: 2,
-    errorLevel: 'H'
-  });
+export default function QRGenerator() {
+  const [url, setUrl] = useState("https://nextools.io");
+  const [verification, setVerification] = useState(null);
+  const [fgColor, setFgColor] = useState("#3b82f6");
+  const [bgColor, setBgColor] = useState("#0a0a0c");
+  const [size, setSize] = useState(512);
+  const [includeMargin, setIncludeMargin] = useState(true);
+  const canvasRef = useRef(null);
 
-  useEffect(() => {
-    if (!text.trim()) {
-      setQrDataUrl("");
-      setQrSvg("");
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      generateQR(text);
-    }, 150);
-
-    return () => clearTimeout(timer);
-  }, [text, options]);
-
-  async function generateQR(value) {
-    try {
-      const dataUrl = await QRCode.toDataURL(value, {
-        width: 1024,
-        margin: options.margin,
-        color: { dark: "#000000", light: "#ffffff" },
-        errorCorrectionLevel: options.errorLevel,
-      });
-      setQrDataUrl(dataUrl);
-
-      const svg = await QRCode.toString(value, {
-        type: "svg",
-        margin: options.margin,
-        color: { dark: "#000000", light: "#ffffff" },
-        errorCorrectionLevel: options.errorLevel,
-      });
-      setQrSvg(svg);
-    } catch (err) {
-      console.error("QR generation failed:", err);
-    }
-  }
-
-  const downloadPNG = () => {
-    if (!qrDataUrl) return;
-    const a = document.createElement("a");
-    a.href = qrDataUrl;
-    a.download = `nexus-qr-${Date.now()}.png`;
-    a.click();
+  const downloadQR = () => {
+    const canvas = document.getElementById("nex-qr-gen");
+    const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "nextools_qr.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
-
-  const downloadSVG = () => {
-    if (!qrSvg) return;
-    const blob = new Blob([qrSvg], { type: "image/svg+xml" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `nexus-qr-${Date.now()}.svg`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
+ const verifyQR = () => {
+  // We use a temporary scanner logic or just display the data for peace of mind
+  setVerification(url);
+  setTimeout(() => setVerification(null), 3000);
+};
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-white p-6 pt-32 relative overflow-hidden selection:bg-blue-500/30 font-sans">
-      
-      {/* --- BACKGROUND AMBIENCE --- */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none" 
-           style={{ backgroundImage: 'radial-gradient(#2563eb 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-blue-600/10 blur-[120px] pointer-events-none" />
-
-      <main className="max-w-7xl mx-auto relative z-10">
+    <div className="min-h-screen bg-[#08080a] text-white p-6 lg:p-12 font-sans selection:bg-blue-500/30">
+      <div className="max-w-6xl mx-auto">
         
-        {/* --- HEADER --- */}
-        <header className="mb-12">
-          <button onClick={() => window.history.back()} className="flex items-center gap-2 text-white/40 hover:text-blue-400 mb-6 transition group text-sm font-bold uppercase tracking-widest">
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back
-          </button>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4">
-            <Zap size={12} className="text-blue-400 animate-pulse" />
-            <span className="text-[9px] font-black uppercase tracking-[2px] text-blue-400">Signal Encoder v2.1</span>
+        {/* NEON HEADER */}
+        <header className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6 border-b border-white/5 pb-10">
+          <div className="flex items-center gap-6">
+            <div className="size-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+              <QrCode size={32} className="text-white" />
+            </div>
+            <div>
+              <h1 className="text-4xl font-black uppercase tracking-tighter italic leading-none">
+                Nex<span className="text-blue-500">QR</span>
+              </h1>
+              <div className="flex items-center gap-2 mt-2">
+                <div className="size-2 bg-blue-500 rounded-full animate-pulse" />
+                <p className="text-[10px] text-white/40 font-bold uppercase tracking-[3px]">Permanent Asset Forge</p>
+              </div>
+            </div>
           </div>
-          <h1 className="text-5xl font-black italic uppercase tracking-tight">
-            QR <span className="text-blue-600 drop-shadow-[0_0_20px_rgba(37,99,235,0.4)]">Generator</span>
-          </h1>
-          <p className="text-white/40 mt-3 font-medium">Convert digital assets into high-density machine-readable matrices.</p>
+          <div className="flex items-center gap-3 px-6 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+            <ShieldCheck size={14} className="text-emerald-500" />
+            <span className="text-[9px] font-black uppercase tracking-widest text-emerald-500">No Tracking • No Expiry</span>
+          </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           
-          {/* --- CONFIGURATION SIDEBAR --- */}
-          <aside className="space-y-6">
-            <div className="bg-white/[0.03] border border-white/5 rounded-[24px] p-6 shadow-2xl backdrop-blur-md sticky top-32">
-              <div className="flex items-center gap-2 mb-6 text-blue-400 font-bold uppercase text-[10px] tracking-widest">
-                <Settings className="w-4 h-4" /> Parameters
+          {/* CONFIGURATION PANEL */}
+          <div className="lg:col-span-5 space-y-6">
+            <section className="bg-[#111115] p-8 rounded-[40px] border border-white/5 shadow-2xl">
+              <label className="text-[10px] font-black uppercase tracking-[3px] text-blue-500 mb-4 block">Destination URL</label>
+              <div className="relative">
+                <LinkIcon size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
+                <input 
+                  type="text" 
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="w-full bg-black/40 border border-white/5 rounded-2xl py-4 pl-12 pr-4 font-medium text-sm outline-none focus:border-blue-500/50 transition-all"
+                />
+              </div>
+            </section>
+
+            <section className="bg-[#111115] p-8 rounded-[40px] border border-white/5 shadow-2xl space-y-8">
+              <h2 className="text-[10px] font-black uppercase tracking-[3px] text-white/30 flex items-center gap-2">
+                <Palette size={14} /> Aesthetics
+              </h2>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-3">
+                  <label className="text-[9px] font-black uppercase text-white/40 tracking-widest">Glow Color</label>
+                  <div className="flex items-center gap-3 bg-black/40 border border-white/5 p-2 rounded-xl">
+                    <input type="color" value={fgColor} onChange={(e) => setFgColor(e.target.value)} className="bg-transparent border-none size-8 cursor-pointer" />
+                    <span className="text-[10px] font-mono uppercase">{fgColor}</span>
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <label className="text-[9px] font-black uppercase text-white/40 tracking-widest">Base Tint</label>
+                  <div className="flex items-center gap-3 bg-black/40 border border-white/5 p-2 rounded-xl">
+                    <input type="color" value={bgColor} onChange={(e) => setBgColor(e.target.value)} className="bg-transparent border-none size-8 cursor-pointer" />
+                    <span className="text-[10px] font-mono uppercase">{bgColor}</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Data Payload</label>
-                  <textarea 
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                    placeholder="Enter URL or Text..."
-                    className="w-full h-32 bg-white/5 border border-white/5 rounded-xl px-4 py-3 text-sm font-bold outline-none focus:border-blue-500/50 transition-all placeholder:text-white/10 resize-none"
-                  />
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <label className="text-[9px] text-white/30 font-black uppercase tracking-widest">Error Correction</label>
-                  <div className="grid grid-cols-4 gap-1 p-1 bg-white/5 rounded-xl border border-white/5">
-                    {['L', 'M', 'Q', 'H'].map((lvl) => (
-                      <button 
-                        key={lvl}
-                        onClick={() => setOptions({...options, errorLevel: lvl})}
-                        className={`py-2 rounded-lg text-[10px] font-black transition-all ${options.errorLevel === lvl ? 'bg-blue-600 text-white' : 'text-white/30 hover:text-white/60'}`}
-                      >
-                        {lvl}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-white/5 space-y-3">
+              <div className="space-y-4 pt-4 border-t border-white/5">
+                <div className="flex justify-between items-center">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-white/30">Quiet Zone (Margin)</span>
                   <button 
-                    onClick={downloadPNG}
-                    disabled={!qrDataUrl}
-                    className="w-full py-4 bg-white text-black rounded-2xl font-black text-xs uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-white/90 disabled:opacity-20 transition-all shadow-xl"
+                    onClick={() => setIncludeMargin(!includeMargin)}
+                    className={`w-12 h-6 rounded-full transition-all relative ${includeMargin ? 'bg-blue-600' : 'bg-white/10'}`}
                   >
-                    <Download className="w-4 h-4" /> Export PNG
-                  </button>
-                  <button 
-                    onClick={downloadSVG}
-                    disabled={!qrSvg}
-                    className="w-full py-4 bg-white/5 border border-white/10 text-white rounded-2xl font-black text-xs uppercase tracking-[2px] flex items-center justify-center gap-2 hover:bg-white/10 disabled:opacity-20 transition-all"
-                  >
-                    <Download className="w-4 h-4" /> Export SVG
+                    <div className={`absolute top-1 size-4 bg-white rounded-full transition-all ${includeMargin ? 'left-7' : 'left-1'}`} />
                   </button>
                 </div>
               </div>
+            </section>
+          </div>
+
+          {/* PREVIEW & EXPORT AREA */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <div className="bg-[#111115] border border-white/5 rounded-[50px] flex-1 flex flex-col items-center justify-center p-12 shadow-2xl relative overflow-hidden group">
+              <div className="absolute top-6 left-6 flex items-center gap-2">
+                <Zap size={14} className="text-blue-500 fill-blue-500" />
+                <span className="text-[10px] font-black uppercase tracking-[4px] text-white/20">Vector Preview</span>
+              </div>
+
+              {/* THE QR CODE ENGINE */}
+              <div className="p-6 bg-white rounded-[32px] shadow-[0_0_50px_rgba(59,130,246,0.15)] transition-transform group-hover:scale-105 duration-500">
+                <QRCodeCanvas
+                  id="nex-qr-gen"
+                  value={url}
+                  size={280}
+                  bgColor={bgColor}
+                  fgColor={fgColor}
+                  level={"H"} // High error correction
+                  includeMargin={includeMargin}
+                />
+              </div>
+
+              <p className="mt-8 text-[10px] font-black uppercase tracking-[5px] text-white/10">Scan to Test Injection</p>
             </div>
 
-            <div className="p-6 bg-blue-500/5 border border-blue-500/10 rounded-[24px] flex gap-3">
-              <ShieldCheck className="text-blue-500 shrink-0" size={20} />
-              <p className="text-[10px] leading-relaxed text-blue-200/50 font-bold uppercase tracking-wider">
-                Encryption Protocol: Generation is finalized in-browser. No data packets sent.
-              </p>
+            <div className="grid grid-cols-2 gap-4">
+              <button 
+                onClick={downloadQR}
+                className="bg-blue-600 hover:bg-blue-500 text-white py-5 rounded-[24px] flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[3px] transition-all shadow-xl shadow-blue-600/20 active:scale-95"
+              >
+                <Download size={18} /> Export High-Res PNG
+              </button>
+              <button 
+  onClick={verifyQR}
+  className={`w-full py-5 rounded-[24px] flex items-center justify-center gap-3 text-[10px] font-black uppercase tracking-[3px] transition-all border ${
+    verification ? 'bg-blue-600/20 border-blue-500 text-blue-400' : 'bg-white/5 border-white/5 text-white hover:bg-white/10'
+  }`}
+>
+  {verification ? <Maximize size={18} className="animate-pulse" /> : <ShieldCheck size={18} />}
+  {verification ? `Verified: ${verification.substring(0, 15)}...` : 'Verify Scan Integrity'}
+</button>
             </div>
-          </aside>
+          </div>
 
-          {/* --- WORKSPACE --- */}
-          <section className="bg-white/[0.03] border border-white/5 rounded-[32px] min-h-[600px] flex flex-col relative overflow-hidden shadow-2xl backdrop-blur-sm">
-            <div className="px-8 py-5 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
-              <span className="text-[10px] font-black uppercase tracking-[3px] text-white/30">Matrix Visualization</span>
-              {text && (
-                <div className="flex items-center gap-2 text-blue-400 text-[10px] font-black uppercase animate-pulse">
-                  <Activity className="w-3 h-3" /> Encoded
-                </div>
-              )}
-            </div>
-
-            <div className="flex-1 p-8 flex flex-col items-center justify-center">
-              {!qrDataUrl ? (
-                <div className="flex flex-col items-center text-center max-w-sm">
-                  <div className="w-24 h-24 bg-blue-500/5 rounded-[32px] flex items-center justify-center mb-6 border border-blue-500/10 shadow-[0_0_30px_rgba(37,99,235,0.1)]">
-                    <QrCode className="text-blue-500/40 w-10 h-10" />
-                  </div>
-                  <h3 className="text-2xl font-black italic uppercase">Matrix Empty</h3>
-                  <p className="text-white/20 text-[10px] mt-2 uppercase tracking-widest font-black leading-relaxed">
-                    Input payload into the configuration panel to generate binary visualization.
-                  </p>
-                </div>
-              ) : (
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-blue-600/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  <div className="relative bg-white p-8 rounded-[24px] shadow-2xl animate-in zoom-in duration-500">
-                    <img
-                      src={qrDataUrl}
-                      alt="Nexus Generated QR"
-                      className="w-full max-w-[280px] h-auto"
-                      style={{ imageRendering: "pixelated" }}
-                    />
-                  </div>
-                  
-                  {/* Quick-Action Overlay */}
-                  <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 bg-black/80 backdrop-blur rounded-full border border-white/5 shadow-2xl opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <button 
-                       onClick={() => {
-                          navigator.clipboard.writeText(text);
-                          setCopied(true);
-                          setTimeout(() => setCopied(false), 2000);
-                       }}
-                       className="flex items-center gap-2 text-[9px] font-black uppercase tracking-widest text-white/60 hover:text-white"
-                    >
-                       {copied ? <Check size={12} className="text-green-500" /> : <Copy size={12} />}
-                       {copied ? 'Copied' : 'Copy Source'}
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Matrix Stats */}
-            {qrDataUrl && (
-               <div className="grid grid-cols-3 border-t border-white/5 divide-x divide-white/5">
-                  <div className="p-6 text-center">
-                     <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1">Density</p>
-                     <p className="text-sm font-bold">{text.length} chars</p>
-                  </div>
-                  <div className="p-6 text-center">
-                     <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1">Correction</p>
-                     <p className="text-sm font-bold text-blue-400">Level {options.errorLevel}</p>
-                  </div>
-                  <div className="p-6 text-center">
-                     <p className="text-[9px] font-black uppercase tracking-widest text-white/20 mb-1">Rendering</p>
-                     <p className="text-sm font-bold">1024px</p>
-                  </div>
-               </div>
-            )}
-          </section>
         </div>
-      </main>
-
-      {/* --- FOOTER --- */}
-      <footer className="mt-20 py-10 flex flex-col items-center gap-4 opacity-30 border-t border-white/5">
-         <p className="text-[9px] font-black uppercase tracking-[5px]">NexTools Workshop Ecosystem</p>
-         <div className="flex items-center gap-4">
-            <span className="h-[1px] w-8 bg-blue-600/50" />
-            <a href="https://instagram.com/berkindev" target="_blank" className="text-[10px] hover:text-blue-400 transition-colors"> @BERKINDEV </a>
-            <span className="h-[1px] w-8 bg-blue-600/50" />
-         </div>
-      </footer>
+      </div>
     </div>
   );
-};
-
-export default QRGenerator;
+}

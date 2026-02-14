@@ -25,6 +25,8 @@ import CodeToImage from "./pages/CodeToImage";
 import PDFProtect from "./pages/PDFProtect";
 import NotFound from "./pages/NotFound";
 import HiddenMessage from "./pages/HiddenMessage";
+import CodeToVideo from "./pages/CodeToVideo";
+import PrivacyRedactor from "./pages/PrivacyRedactor";
 
 // --- Layout Wrapper ---
 const LayoutWrapper = ({ children }) => {
@@ -73,6 +75,9 @@ function AnimatedRoutes() {
         <Route path="/services/codetoimage" element={<PageTransition><CodeToImage /></PageTransition>} />
         <Route path="/services/pdfprotect" element={<PageTransition><PDFProtect /></PageTransition>} />
         <Route path="/services/hiddenmessage" element={<PageTransition><HiddenMessage /></PageTransition>} />
+        <Route path="/services/codetovideo" element={<PageTransition><CodeToVideo /></PageTransition>} />
+        <Route path="/services/privacyredactor" element={<PageTransition><PrivacyRedactor /></PageTransition>} />
+      
 
         <Route path="*" element={<NotFound />} />
       </Routes>

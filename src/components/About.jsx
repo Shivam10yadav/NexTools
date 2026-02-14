@@ -1,78 +1,88 @@
 import React from 'react';
-import { ShieldCheck, Zap, Globe, Lock, Droplets, Palette, Code2, FileLock } from 'lucide-react';
+import { ShieldCheck, Zap, Droplets, Palette, Sparkles, QrCode, Lock, Cpu } from 'lucide-react';
 
 const About = () => {
   const popularServices = [
     {
-      title: "Hard Blur",
+      title: "NexRedact",
       label: "Privacy",
-      desc: "Annihilate sensitive data. Our algorithm smudges pixels beyond mathematical recovery.",
+      desc: "Instantly hide sensitive data in screenshots. We smudge pixels in your browser so they can never be seen again.",
       icon: <Droplets className="text-blue-500" size={24} />,
       gradient: "from-blue-500/20 to-transparent"
     },
     {
-      title: "Document Vault",
-      label: "Security",
-      desc: "Apply 128-bit AES encryption to PDFs in milliseconds. No cloud, no risk, no leaks.",
-      icon: <FileLock className="text-purple-500" size={24} />,
+      title: "NexPrompt",
+      label: "AI Studio",
+      desc: "Turn a simple 'hello' into a professional AI command. We provide the vocabulary that AI models love.",
+      icon: <Sparkles className="text-purple-500" size={24} />,
       gradient: "from-purple-500/20 to-transparent"
     },
     {
-      title: "Code Snap",
-      label: "Creator",
-      desc: "Turn raw logic into social-media-ready art with Mac-style window frames and glass effects.",
-      icon: <Code2 className="text-orange-500" size={24} />,
+      title: "NexQR",
+      label: "Branding",
+      desc: "Create permanent, colorful QR codes. No tracking, no expiration dates, and 100% private.",
+      icon: <QrCode className="text-orange-500" size={24} />,
       gradient: "from-orange-500/20 to-transparent"
     },
     {
       title: "Color Thief",
       label: "Design",
-      desc: "Extract dominant HEX palettes from any image instantly using high-speed quantization.",
+      desc: "Steal the perfect colors from any photo. Drag an image, get a pro-level color palette instantly.",
       icon: <Palette className="text-emerald-500" size={24} />,
       gradient: "from-emerald-500/20 to-transparent"
     }
   ];
 
   return (
-    <section id="about" className="bg-[#0a0a0c] text-white py-32 px-6 relative overflow-hidden">
+    <section id="about" className="bg-[#08080a] text-white py-32 px-6 relative overflow-hidden">
+      {/* Background Ambient Glow */}
+      <div className="absolute top-0 left-1/4 size-[500px] bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+      
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Main Identity Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-20 items-center mb-40">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-20 items-center mb-40">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-8">
+            <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-blue-500/5 border border-blue-500/20 mb-8">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
-              <span className="text-[10px] font-black uppercase tracking-[3px] text-blue-400">Zero-Server Logic</span>
+              <span className="text-[10px] font-black uppercase tracking-[4px] text-blue-400">Personal Workshop Engine</span>
             </div>
 
-            <h2 className="text-6xl md:text-[90px] font-black tracking-tighter uppercase italic leading-[0.85] mb-10">
-              The internet is <br /> 
-              <span className="text-white/10">not your locker.</span>
+            <h2 className="text-6xl md:text-[100px] font-black tracking-tighter uppercase italic leading-[0.8] mb-12">
+              Your data <br /> 
+              <span className="text-white/5 italic">is not a product.</span>
             </h2>
             
-            <p className="text-xl md:text-2xl text-white/50 leading-tight max-w-2xl font-medium tracking-tight">
-              Most online tools <span className="text-white">harvest your data</span>. We built a digital sanctuary where files are processed in your RAM, not on our servers. 
-              <span className="text-blue-500 underline decoration-2 underline-offset-8 ml-2 italic">Privacy isn't a feature; it's our core.</span>
+            <p className="text-xl md:text-2xl text-white/40 leading-snug max-w-2xl font-bold tracking-tight">
+              Most online tools <span className="text-white underline decoration-blue-500/50">store your files</span>. We don't. NexTools runs entirely in your browser memory. 
+              <span className="block mt-6 text-blue-500 italic">No Uploads. No Servers. No Logs. Just Utilities.</span>
             </p>
           </div>
 
           <div className="relative group">
-            <div className="absolute inset-0 bg-blue-600/20 blur-[80px] group-hover:bg-blue-600/30 transition-all duration-700" />
-            <div className="relative bg-white/[0.02] border border-white/10 p-10 rounded-[48px] backdrop-blur-3xl shadow-2xl">
-              <h4 className="text-[10px] font-black uppercase tracking-[4px] text-white/30 mb-8">System Integrity</h4>
-              <div className="space-y-8">
+            <div className="absolute inset-0 bg-blue-600/10 blur-[100px] group-hover:bg-blue-600/20 transition-all duration-1000" />
+            <div className="relative bg-[#111115] border border-white/5 p-12 rounded-[60px] shadow-2xl overflow-hidden">
+               {/* Decorative Grid */}
+              <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+              
+              <h4 className="text-[10px] font-black uppercase tracking-[5px] text-white/20 mb-10 flex items-center gap-2">
+                <Lock size={12} className="text-blue-500" /> Security Protocol
+              </h4>
+              
+              <div className="space-y-10 relative z-10">
                 {[
-                  { icon: <ShieldCheck />, text: "Client-Side Only Processing", sub: "Data never leaves your browser." },
-                  { icon: <Zap />, text: "Local GPU Acceleration", sub: "Blazing fast browser-based math." }
+                  { icon: <ShieldCheck />, text: "Edge-only logic", sub: "Data never touches a cloud server." },
+                  { icon: <Zap />, text: "Zero-latency", sub: "Processes as fast as your CPU can think." },
+                  { icon: <Cpu />, text: "RAM Isolated", sub: "Closing the tab wipes all session data." }
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-5">
-                    <div className="text-blue-500 mt-1">{item.icon}</div>
+                  <div key={i} className="flex gap-6 items-center">
+                    <div className="text-blue-500 p-3 bg-blue-500/10 rounded-2xl">{item.icon}</div>
                     <div>
-                      <p className="font-bold text-sm uppercase tracking-wide">{item.text}</p>
-                      <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest mt-1">{item.sub}</p>
+                      <p className="font-black text-xs uppercase tracking-widest text-white/90">{item.text}</p>
+                      <p className="text-[9px] font-bold text-white/20 uppercase tracking-[2px] mt-1">{item.sub}</p>
                     </div>
                   </div>
                 ))}
@@ -81,38 +91,40 @@ const About = () => {
           </div>
         </div>
 
-        {/* Feature Grid with Enhanced Cards */}
+        {/* Feature Grid */}
         <div>
-          <div className="mb-20">
-            <h3 className="text-4xl font-black uppercase italic tracking-tighter">
-              Utility <span className="text-white/20 text-5xl">Stack</span>
-            </h3>
-            <div className="w-20 h-1 bg-blue-600 mt-4 rounded-full" />
+          <div className="flex items-end justify-between mb-16 border-b border-white/5 pb-10">
+            <div>
+              <h3 className="text-5xl font-black uppercase italic tracking-tighter leading-none">
+                Utility <span className="text-blue-500">Workshop</span>
+              </h3>
+              <p className="text-[10px] font-black uppercase tracking-[5px] text-white/20 mt-4">Powerful tools without the privacy tax</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {popularServices.map((service, index) => (
               <div 
                 key={index}
-                className="group relative p-8 rounded-[40px] bg-[#111116] border border-white/5 hover:border-blue-500/30 transition-all duration-500 overflow-hidden"
+                className="group relative p-10 rounded-[48px] bg-[#111116] border border-white/5 hover:border-blue-500/40 transition-all duration-500 overflow-hidden"
               >
                 {/* Background Glow on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
                 
                 <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-10">
-                    <div className="p-4 bg-white/5 rounded-2xl group-hover:scale-110 transition-transform duration-500">
+                  <div className="flex justify-between items-start mb-12">
+                    <div className="p-5 bg-white/5 rounded-[24px] group-hover:bg-blue-600 transition-all duration-500 text-white">
                       {service.icon}
                     </div>
-                    <span className="text-[9px] font-black uppercase tracking-widest px-2 py-1 rounded bg-white/5 text-white/40">
+                    <span className="text-[8px] font-black uppercase tracking-[3px] px-3 py-1 rounded-full border border-white/10 text-white/30">
                       {service.label}
                     </span>
                   </div>
                   
-                  <h4 className="text-xl font-bold mb-4 tracking-tight group-hover:text-blue-400 transition-colors">
+                  <h4 className="text-xl font-black mb-4 tracking-tighter uppercase italic group-hover:text-blue-400 transition-colors">
                     {service.title}
                   </h4>
-                  <p className="text-sm text-white/30 leading-relaxed font-medium">
+                  <p className="text-xs text-white/30 leading-relaxed font-bold uppercase tracking-tight">
                     {service.desc}
                   </p>
                 </div>
