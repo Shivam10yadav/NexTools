@@ -7,7 +7,8 @@ import {
   EyeOff,
   CodeIcon,
   LockKeyhole,
-  Fingerprint
+  Fingerprint,
+  SparklesIcon
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -20,6 +21,7 @@ const Sidebar = () => {
       icon: FileStack,
       items: [
         { name: 'Merger', path: '/services/pdfmerger', icon: Layers },
+        { name: 'AI Summarizer', path: '/services/aipdf', icon: SparklesIcon},
         { name: 'Splitter', path: '/services/pdfsplitter', icon: Scissors },
         { name: 'Organizer', path: '/services/pdforganizer', icon: Hash },
         { name: 'Compressor', path: '/services/pdfcompressor', icon: Minimize2 },
