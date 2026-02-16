@@ -1,16 +1,92 @@
-# React + Vite
+NexTools
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NexTools is a modern, privacy-first web utility platform that provides a comprehensive suite of document, image, and security tools — all running entirely in the browser.
 
-Currently, two official plugins are available:
+The platform is built with a client-side architecture to ensure maximum privacy, performance, and zero data retention.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔎 Project Overview
 
-## React Compiler
+NexTools was designed to solve everyday digital workflow problems such as PDF management, image processing, privacy protection, and content generation — without requiring user accounts, backend servers, or cloud uploads.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Unlike traditional online utility platforms, NexTools processes all files locally in the user’s browser using JavaScript-based processing libraries.
 
-## Expanding the ESLint configuration
+This ensures:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+.Zero server dependency
+.Zero data storage
+.Zero third-party tracking
+.Complete user privacy
+
+🏗️ Architecture
+
+.Type: Fully Client-Side Application
+.Backend: None
+.Database: None
+.Processing Model: In-browser computation
+
+All operations are executed locally using browser APIs and JavaScript libraries. Files never leave the user’s device.
+
+🛠 Core Features
+📄 PDF Utilities
+
+.PDF Splitter
+.PDF Merger
+.PDF Compressor
+.PDF Organizer
+.PDF Watermarking
+.PDF Password Protection
+.PDF Content Editing
+.Text to PDF
+.Image to PDF
+
+🖼 Image Utilities
+
+.Background Remover
+.Image Converter
+.Code to Image
+.Code to Video
+.Color Palette Generator
+
+🔐 Privacy & Security Tools
+
+.Privacy Redactor
+.Hidden Message Encoder
+.Password Generator
+
+⚡ Key Highlights
+
+100% Browser-Based Processing
+
+.No File Uploads
+.No Authentication Required
+.Lightweight & Fast
+.Modular Tool Architecture
+.Clean, Scalable UI Structure
+
+🧰 Technology Stack
+
+.React
+.React Router
+.Tailwind CSS
+.pdf.js
+.Client-side file processing libraries
+.Modern JavaScript (ES6+)
+
+🔒 Security Protocol
+NexTools uses a Volatile Memory Architecture. When you upload a file, it is converted into an ArrayBuffer in your browser's RAM. Once you close the tab or refresh, the data is wiped from existence. The only external call is to the Gemini API for "Neural" features, which only sends raw text, never the original file.
+
+🎯 Target Users
+
+.Students managing academic PDFs
+.Developers handling code snippets and utilities
+.Freelancers processing documents and images
+.Privacy-conscious users 
+
+📦 Deployment
+
+NexTools is deployed as a static frontend application using modern hosting platforms optimized for performance and scalability.
+
+👨‍💻 Author
+शिवम यादव (Shivam Yadav)
+Architecting the future of private, high-performance web utilities.
+Instagram
