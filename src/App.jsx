@@ -27,6 +27,7 @@ import NotFound from "./pages/NotFound";
 import HiddenMessage from "./pages/HiddenMessage";
 import CodeToVideo from "./pages/CodeToVideo";
 import PrivacyRedactor from "./pages/PrivacyRedactor";
+import PasswordGenerator from "./pages/PasswordGenerator";
 
 // --- Layout Wrapper ---
 const LayoutWrapper = ({ children }) => {
@@ -77,6 +78,7 @@ function AnimatedRoutes() {
         <Route path="/services/hiddenmessage" element={<PageTransition><HiddenMessage /></PageTransition>} />
         <Route path="/services/codetovideo" element={<PageTransition><CodeToVideo /></PageTransition>} />
         <Route path="/services/privacyredactor" element={<PageTransition><PrivacyRedactor /></PageTransition>} />
+        <Route path="/services/passwordgenerator" element={<PageTransition><PasswordGenerator /></PageTransition>} />
       
 
         <Route path="*" element={<NotFound />} />

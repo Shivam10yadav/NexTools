@@ -5,7 +5,9 @@ import {
   ShieldAlert, Edit3, Image as ImageIcon, QrCode, FileText, X, LayoutGrid,
   FileStack, Wand2, Palette, Code2, Lock, ChevronDown, Video,
   EyeOff,
-  CodeIcon
+  CodeIcon,
+  LockKeyhole,
+  Fingerprint
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -45,6 +47,7 @@ const Sidebar = () => {
         { name: 'Code To Video', path: '/services/codetovideo', icon: CodeIcon },
         { name: 'Color Extrac.', path: '/services/colorpalette', icon: Palette },
         { name: 'QR Gen', path: '/services/qrgenerator', icon: QrCode },
+        { name: 'Password Generator', path: '/services/passwordgenerator', icon:Fingerprint },
         { name: 'Text to PDF', path: '/services/texttopdf', icon: FileText },
       ]
     }
