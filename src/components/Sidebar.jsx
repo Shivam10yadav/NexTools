@@ -8,7 +8,8 @@ import {
   CodeIcon,
   LockKeyhole,
   Fingerprint,
-  SparklesIcon
+  SparklesIcon,
+  FileJson
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -21,8 +22,7 @@ const Sidebar = () => {
       icon: FileStack,
       items: [
         { name: 'Merger', path: '/services/pdfmerger', icon: Layers },
-        { name: 'AI Summarizer', path: '/services/aipdf', icon: SparklesIcon},
-        { name: 'Splitter', path: '/services/pdfsplitter', icon: Scissors },
+         { name: 'Splitter', path: '/services/pdfsplitter', icon: Scissors },
         { name: 'Organizer', path: '/services/pdforganizer', icon: Hash },
         { name: 'Compressor', path: '/services/pdfcompressor', icon: Minimize2 },
         { name: 'Watermarker', path: '/services/pdfwatermarker', icon: ShieldAlert },
@@ -51,6 +51,7 @@ const Sidebar = () => {
         { name: 'QR Gen', path: '/services/qrgenerator', icon: QrCode },
         { name: 'Password Generator', path: '/services/passwordgenerator', icon:Fingerprint },
         { name: 'Text to PDF', path: '/services/texttopdf', icon: FileText },
+        { name: 'Json Formatter', path: '/services/jsonFormatter', icon: FileJson },
       ]
     }
   ];
