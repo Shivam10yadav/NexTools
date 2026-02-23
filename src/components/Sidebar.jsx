@@ -10,7 +10,8 @@ import {
   Fingerprint,
   SparklesIcon,
   FileJson,
-  Signature
+  Signature,
+  DiffIcon
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -50,6 +51,7 @@ const Sidebar = () => {
         { name: 'Privacy Redactor', path: '/services/privacyredactor', icon: ShieldAlert },
         { name: 'Code To Video', path: '/services/codetovideo', icon: CodeIcon },
         { name: 'Color Extrac.', path: '/services/colorpalette', icon: Palette },
+        { name: 'Difference Checker.', path: '/services/diffchecker', icon: DiffIcon },
         { name: 'QR Gen', path: '/services/qrgenerator', icon: QrCode },
         { name: 'Password Generator', path: '/services/passwordgenerator', icon:Fingerprint },
         { name: 'Text to PDF', path: '/services/texttopdf', icon: FileText },

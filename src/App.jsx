@@ -30,6 +30,8 @@ import PrivacyRedactor from "./pages/PrivacyRedactor";
 import PasswordGenerator from "./pages/PasswordGenerator";
 import JsonFormatter from "./pages/JsonFormatter";
 import PdfSign from "./pages/pdfSign";
+import DiffChecker from "./pages/diffChecker";
+
 
 
 
@@ -85,6 +87,7 @@ function AnimatedRoutes() {
         <Route path="/services/passwordgenerator" element={<PageTransition><PasswordGenerator /></PageTransition>} />
         <Route path="/services/jsonformatter" element={<PageTransition><JsonFormatter /></PageTransition>} />
         <Route path="/services/pdfsign" element={<PageTransition><PdfSign /></PageTransition>} />
+        <Route path="/services/diffchecker" element={<PageTransition><DiffChecker /></PageTransition>} />
       
       
 {/* No routes found page */}
