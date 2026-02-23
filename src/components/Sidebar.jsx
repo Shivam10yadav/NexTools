@@ -9,7 +9,8 @@ import {
   LockKeyhole,
   Fingerprint,
   SparklesIcon,
-  FileJson
+  FileJson,
+  Signature
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -21,6 +22,7 @@ const Sidebar = () => {
       title: "PDF Tools",
       icon: FileStack,
       items: [
+        { name: 'Sign Engine', path: '/services/pdfsign', icon: Signature },
         { name: 'Merger', path: '/services/pdfmerger', icon: Layers },
          { name: 'Splitter', path: '/services/pdfsplitter', icon: Scissors },
         { name: 'Organizer', path: '/services/pdforganizer', icon: Hash },

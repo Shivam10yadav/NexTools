@@ -29,6 +29,8 @@ import CodeToVideo from "./pages/CodeToVideo";
 import PrivacyRedactor from "./pages/PrivacyRedactor";
 import PasswordGenerator from "./pages/PasswordGenerator";
 import JsonFormatter from "./pages/JsonFormatter";
+import PdfSign from "./pages/pdfSign";
+
 
 
 // --- Layout Wrapper ---
@@ -82,6 +84,7 @@ function AnimatedRoutes() {
         <Route path="/services/privacyredactor" element={<PageTransition><PrivacyRedactor /></PageTransition>} />
         <Route path="/services/passwordgenerator" element={<PageTransition><PasswordGenerator /></PageTransition>} />
         <Route path="/services/jsonformatter" element={<PageTransition><JsonFormatter /></PageTransition>} />
+        <Route path="/services/pdfsign" element={<PageTransition><PdfSign /></PageTransition>} />
       
       
 {/* No routes found page */}
