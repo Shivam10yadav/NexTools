@@ -11,54 +11,63 @@ import {
   SparklesIcon,
   FileJson,
   Signature,
-  DiffIcon
+  DiffIcon,
+  CardSim
 } from 'lucide-react';
 
 const Sidebar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openCategory, setOpenCategory] = useState(null); // For Mobile Toggles
 
-  const categories = [
-    {
-      title: "PDF Tools",
-      icon: FileStack,
-      items: [
-        { name: 'Sign Engine', path: '/services/pdfsign', icon: Signature },
-        { name: 'Merger', path: '/services/pdfmerger', icon: Layers },
-         { name: 'Splitter', path: '/services/pdfsplitter', icon: Scissors },
-        { name: 'Organizer', path: '/services/pdforganizer', icon: Hash },
-        { name: 'Compressor', path: '/services/pdfcompressor', icon: Minimize2 },
-        { name: 'Watermarker', path: '/services/pdfwatermarker', icon: ShieldAlert },
-        { name: 'Pdf Protect', path: '/services/pdfprotect', icon: Lock },
-        { name: 'Editor', path: '/services/pdfeditor', icon: Edit3 },
-      ]
-    },
-    {
-      title: "Image Studio",
-      icon: ImageIcon,
-      items: [
-         { name: 'Hidden Message.', path: '/services/hiddenmessage', icon: EyeOff },
-        { name: 'Image Conv.', path: '/services/imageconverter', icon: ImageIcon },
-        { name: 'Background Remover', path: '/services/backgroundremover', icon: Wand2 },
-        { name: 'Image To PDF', path: '/services/imagetopdf', icon: FileStack }, 
-      ]
-    },
-    {
-      title: "Dev Tools",
-      icon: Code2,
-      items: [
-        { name: 'Code Snippets', path: '/services/codetoimage', icon: Code2 },
-        { name: 'Privacy Redactor', path: '/services/privacyredactor', icon: ShieldAlert },
-        { name: 'Code To Video', path: '/services/codetovideo', icon: CodeIcon },
-        { name: 'Color Extrac.', path: '/services/colorpalette', icon: Palette },
-        { name: 'Difference Checker.', path: '/services/diffchecker', icon: DiffIcon },
-        { name: 'QR Gen', path: '/services/qrgenerator', icon: QrCode },
-        { name: 'Password Generator', path: '/services/passwordgenerator', icon:Fingerprint },
-        { name: 'Text to PDF', path: '/services/texttopdf', icon: FileText },
-        { name: 'Json Formatter', path: '/services/jsonFormatter', icon: FileJson },
-      ]
-    }
-  ];
+ const categories = [
+  {
+    title: "Documents",
+    icon: FileStack,
+    items: [
+      { name: "Sign Engine", path: "/services/pdfsign", icon: Signature },
+      { name: "PDF Merger", path: "/services/pdfmerger", icon: Layers },
+      { name: "PDF Splitter", path: "/services/pdfsplitter", icon: Scissors },
+      { name: "PDF Organizer", path: "/services/pdforganizer", icon: Hash },
+      { name: "PDF Compressor", path: "/services/pdfcompressor", icon: Minimize2 },
+      { name: "PDF Watermarker", path: "/services/pdfwatermarker", icon: ShieldAlert },
+      { name: "PDF Protect", path: "/services/pdfprotect", icon: Lock },
+      { name: "PDF Editor", path: "/services/pdfeditor", icon: Edit3 },
+      { name: "Text to PDF", path: "/services/texttopdf", icon: FileText },
+      { name: "Image to PDF", path: "/services/imagetopdf", icon: FileStack },
+    ]
+  },
+  {
+    title: "Image & Media",
+    icon: ImageIcon,
+    items: [
+      { name: "Image Converter", path: "/services/imageconverter", icon: ImageIcon },
+      { name: "Background Remover", path: "/services/backgroundremover", icon: Wand2 },
+      { name: "Hidden Message", path: "/services/hiddenmessage", icon: EyeOff },
+      { name: "Business Card", path: "/services/businesscard", icon: CardSim },
+      { name: "Color Extractor", path: "/services/colorpalette", icon: Palette },
+      { name: "Code to Image", path: "/services/codetoimage", icon: Code2 },
+      { name: "Code to Video", path: "/services/codetovideo", icon: CodeIcon },
+    ]
+  },
+  {
+    title: "Developer Tools",
+    icon: Code2,
+    items: [
+      { name: "Code Snippets", path: "/services/codesnippets", icon: Code2 },
+      { name: "JSON Formatter", path: "/services/jsonFormatter", icon: FileJson },
+      { name: "Difference Checker", path: "/services/diffchecker", icon: DiffIcon },
+      { name: "QR Generator", path: "/services/qrgenerator", icon: QrCode },
+    ]
+  },
+  {
+    title: "Security & Privacy",
+    icon: ShieldAlert,
+    items: [
+      { name: "Privacy Redactor", path: "/services/privacyredactor", icon: ShieldAlert },
+      { name: "Password Generator", path: "/services/passwordgenerator", icon: Fingerprint },
+    ]
+  }
+];
 
   const toggleCategory = (title) => {
     setOpenCategory(openCategory === title ? null : title);
