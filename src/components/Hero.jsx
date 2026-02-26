@@ -164,6 +164,24 @@ const Hero = () => {
               Our Tools
             </button>
           </Link>
+            <button
+    onClick={() => {
+      const deferredPrompt = window._pwaInstallPrompt;
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          window._pwaInstallPrompt = null;
+        });
+      }
+    }}
+    id="pwa-install-btn"
+    className="hidden px-12 py-5 text-sm font-black uppercase tracking-widest text-blue-400 rounded-2xl border border-blue-500/30 hover:bg-blue-500/10 transition-all gap-3 items-center justify-center"
+  >
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+      <path d="M12 16L7 11M12 16l5-5M12 16V4M4 20h16"/>
+    </svg>
+    Install App
+  </button>
         </div>
 
        

@@ -17,3 +17,19 @@ if ("serviceWorker" in navigator) {
       .catch((err) => console.log("SW failed ❌", err));
   });
 }
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  window._pwaInstallPrompt = e;
+  const btn = document.getElementById('pwa-install-btn');
+  if (btn) {
+    btn.classList.remove('hidden');
+    btn.classList.add('flex');
+  }
+});
+
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('pwa-install-btn');
+  if (btn) btn.classList.add('hidden');
+  window._pwaInstallPrompt = null;
+});
