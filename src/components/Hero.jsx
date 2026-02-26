@@ -181,6 +181,7 @@ const Hero = () => {
       <path d="M12 16L7 11M12 16l5-5M12 16V4M4 20h16"/>
     </svg>
     Install App
+  {/* insall app  */}
   </button>
         </div>
 
